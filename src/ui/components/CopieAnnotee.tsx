@@ -88,10 +88,10 @@ export function CopieAnnotee({ src, alt, erreurs, selection, onSelect }: Props) 
         <span className="font-mono text-xs text-muet">zoom ×{vue.echelle.toFixed(1)}</span>
         {vue.echelle > 1 ? (
           <Bouton variante="discret" onClick={() => setVue(reinitialiser())}>
-            Réinitialiser le zoom
+            Reset zoom
           </Bouton>
         ) : (
-          <span className="text-xs text-muet">Clique sur une faute pour zoomer dessus.</span>
+          <span className="text-xs text-muet">Click a mistake to zoom in on it.</span>
         )}
       </div>
     </div>

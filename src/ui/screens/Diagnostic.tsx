@@ -34,7 +34,7 @@ function LigneErreur({
         <span className="font-mono text-xs text-muet">{index + 1}</span>
         <BadgeCode code={erreur.code} confiance={erreur.confiance} />
         {erreur.ponderee ? null : (
-          <span className="text-xs text-muet">signalée, non comptée dans le profil</span>
+          <span className="text-xs text-muet">flagged, not counted in the profile</span>
         )}
       </div>
       <p className="font-mono text-sm text-texte/90">{erreur.ligne}</p>
@@ -57,9 +57,9 @@ export function Diagnostic() {
   if (!resultat) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">Diagnostic</h1>
-        <p className="text-sm text-muet">Aucune analyse en cours. Commence par photographier une copie.</p>
-        <Bouton onClick={() => aller('cadrage')}>Photographier une copie</Bouton>
+        <h1 className="text-2xl font-bold tracking-tight">Diagnosis</h1>
+        <p className="text-sm text-muet">No analysis yet. Start by photographing a paper.</p>
+        <Bouton onClick={() => aller('cadrage')}>Photograph a paper</Bouton>
       </div>
     )
   }
@@ -78,38 +78,37 @@ export function Diagnostic() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">
-        {copiePropre ? 'Aucune erreur détectée' : `${diagnostic.nbFautes} point(s) à travailler`}
+      <h1 className="text-2xl font-bold tracking-tight">
+        {copiePropre ? 'No mistakes found' : `${diagnostic.nbFautes} point(s) to work on`}
       </h1>
 
       {demo ? (
         <p className="rounded-lg border border-bord bg-surface-2 px-3 py-2 text-xs text-muet">
-          Démonstration — {demo.titre} : réponses **et durées réelles** enregistrées le{' '}
-          {demo.enregistreLe.slice(0, 10)} avec {demo.modele}. Aucun appel réseau pendant la
-          démonstration.
+          Demo — {demo.titre}: answers **and real timings** recorded on{' '}
+          {demo.enregistreLe.slice(0, 10)} with {demo.modele}. No network call during the demo.
         </p>
       ) : null}
 
       <p className="text-xs text-muet">
-        {msTotal > 0 ? `Analyse en ${(msTotal / 1000).toFixed(1)} s · ` : ''}
+        {msTotal > 0 ? `Analysed in ${(msTotal / 1000).toFixed(1)}s · ` : ''}
         {revue && revue.revues > 0
-          ? `${revue.revues} faute(s) peu sûre(s) revérifiée(s), ${revue.modifiees} corrigée(s)`
-          : 'aucune faute n’a eu besoin d’une seconde vérification'}
+          ? `${revue.revues} low-confidence mistake(s) rechecked, ${revue.modifiees} corrected`
+          : 'no mistake needed a second check'}
       </p>
 
       <CopieAnnotee
         src={imageAnonymisee}
-        alt="Ta copie, nom masqué"
+        alt="Your paper, name masked"
         erreurs={diagnostic.erreurs}
         selection={selection}
         onSelect={(index) => setSelection(index === selection ? null : index)}
       />
 
       {copiePropre ? (
-        <Carte titre="C'est propre" ton="vert">
+        <Carte titre="All clean" ton="vert">
           <p className="text-sm text-muet">
-            Le professeur n’a annoté aucune faute. Rien à travailler aujourd’hui : ajoute une autre
-            copie pour affiner ton profil.
+            The teacher marked no mistake. Nothing to work on today: add another paper to refine
+            your profile.
           </p>
         </Carte>
       ) : (
@@ -132,7 +131,7 @@ export function Diagnostic() {
       {progression.length > 0 ? (
         <details className="rounded-xl border border-bord bg-surface p-4">
           <summary className="cursor-pointer text-sm font-medium text-texte">
-            Trace de l’analyse — ce que chaque étape a produit
+            Analysis trace — what each step produced
           </summary>
           <ul className="mt-3 space-y-2">
             {progression.map((entree) => (
@@ -150,7 +149,7 @@ export function Diagnostic() {
 
       {exercice ? (
         <Bouton onClick={() => aller('exercice')} pleineLargeur>
-          Faire l’exercice ciblé sur {exercice.exercice.typeTravaille}
+          Do the exercise targeted on {exercice.exercice.typeTravaille}
         </Bouton>
       ) : null}
       {messageExercice ? <p className="text-sm text-muet">{messageExercice}</p> : null}

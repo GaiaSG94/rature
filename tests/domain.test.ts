@@ -59,7 +59,7 @@ describe('profil d’erreur', () => {
     const profil = agreger(agreger(profilVide(), diagnostic), { ...diagnostic, id: 'd2' })
     expect(typeDominant(profil)).toBe('E01')
     expect(Math.round(partDuType(profil, 'E01') * 100)).toBe(100)
-    expect(phraseSynthese(profil)).toContain('signe perdu')
+    expect(phraseSynthese(profil)).toContain('lost sign')
     expect(profil.totalAnalyses).toBe(2)
     expect(classement(profil).map((e) => e.code)).toEqual(['E01'])
   })
@@ -67,7 +67,7 @@ describe('profil d’erreur', () => {
   it('profil vide : pas de dominant, phrase d’invitation', () => {
     const vide = profilVide()
     expect(typeDominant(vide)).toBeNull()
-    expect(phraseSynthese(vide)).toContain('Pas encore')
+    expect(phraseSynthese(vide)).toContain('No recurring mistake')
   })
 
   it('agréger ne mute jamais l’entrée', () => {

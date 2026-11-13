@@ -26,9 +26,9 @@ const ECRANS: Record<Ecran, () => JSX.Element> = {
 
 /** Routeur maison : un état, huit écrans, aucune dépendance externe. */
 const ETIQUETTES_SANTE = {
-  ok: 'modèle en ligne',
-  ko: 'modèle indisponible',
-  inconnue: 'modèle non sondé',
+  ok: 'model online',
+  ko: 'model unavailable',
+  inconnue: 'model not probed',
 } as const
 
 export function Application() {
@@ -41,7 +41,7 @@ export function Application() {
         <EcranActif />
       </main>
       <footer className="mt-8 border-t border-bord pt-4 text-xs text-muet">
-        Aucune copie n’est conservée · historique local ·{' '}
+        No paper is ever stored · local history ·{' '}
         <span
           aria-label={ETIQUETTES_SANTE[santeProxy]}
           title={ETIQUETTES_SANTE[santeProxy]}

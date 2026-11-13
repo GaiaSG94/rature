@@ -12,10 +12,10 @@ const COULEURS: Record<Tendance, string> = {
 }
 
 const ETIQUETTES: Record<Tendance, string> = {
-  baisse: 'en baisse',
-  stable: 'stable',
-  hausse: 'en hausse',
-  inconnue: 'pas encore assez de copies',
+  baisse: 'going down',
+  stable: 'steady',
+  hausse: 'going up',
+  inconnue: 'not enough papers yet',
 }
 
 /**
@@ -31,7 +31,7 @@ export function CourbeType({ code, serie, tendance }: Props) {
     .map((valeur, index) => `${index * pas},${hauteur - (valeur / max) * (hauteur - 4) - 2}`)
     .join(' ')
   const couleur = COULEURS[tendance]
-  const description = `${libelleDe(code)} : ${serie.length} copie(s), ${ETIQUETTES[tendance]}`
+  const description = `${libelleDe(code)}: ${serie.length} paper(s), ${ETIQUETTES[tendance]}`
 
   return (
     <div className="flex items-center gap-3">

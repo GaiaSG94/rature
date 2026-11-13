@@ -37,7 +37,7 @@ describe('quoiReprendreLundi', () => {
 
   it('classe sans erreur pondérée → phrase de repli et tableaux vides', () => {
     const plan = quoiReprendreLundi(stats({}))
-    expect(plan.phrase).toBe('Rien à reprendre en classe entière.')
+    expect(plan.phrase).toBe('Nothing to review with the whole class.')
     expect(plan.types).toEqual([])
     expect(plan.exercices).toEqual([])
     expect(plan.partCumulee).toBe(0)

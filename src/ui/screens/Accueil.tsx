@@ -11,48 +11,48 @@ export function Accueil() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">
-          Ta copie corrigée sait ce que tu répètes.
+        <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+          Your corrected paper knows what you repeat.
         </h1>
         <p className="text-muet">
-          Photographie-la. On lit les annotations du professeur, on les range par type d’erreur,
-          et on fabrique l’exercice qui travaille <em>ta</em> faille.
+          Photograph it. We read the teacher's marks, sort them by error type, and build the
+          exercise that works on <em>your</em> weakness.
         </p>
       </div>
 
       <Bouton onClick={() => aller('cadrage')} pleineLargeur>
-        Photographier ma copie
+        Photograph my paper
       </Bouton>
 
       <BandeauSante />
 
       <div className="flex flex-col items-center gap-2">
         <Bouton variante="discret" onClick={() => void analyserDemo()} disabled={occupe}>
-          Pas de copie sous la main ? Lancer la démonstration
+          No paper handy? Run the demo
         </Bouton>
         {plusieurs ? (
           <Bouton variante="discret" onClick={() => void analyserDemo(ID_COPIES_DEMO)} disabled={occupe}>
-            Démonstration complète ({ID_COPIES_DEMO.length} copies → profil et trajectoire)
+            Full demo ({ID_COPIES_DEMO.length} papers → profile and trajectory)
           </Bouton>
         ) : null}
         <p className="text-center text-xs text-muet">
-          Réponses du modèle réellement enregistrées sur {COPIES_DEMO.length} copie(s) d’exemple —
-          aucun appel réseau, aucune clé.
+          Model answers actually recorded on {COPIES_DEMO.length} sample paper(s) — no network
+          call, no key.
         </p>
       </div>
 
       <p className="text-center text-sm text-muet">
-        Aucune copie n’est conservée. Ton historique reste sur ton appareil.
+        No paper is ever stored. Your history stays on your device.
       </p>
 
       {profil.totalAnalyses > 0 ? (
-        <Carte titre="Reprendre" ton="vert">
+        <Carte titre="Continue" ton="vert">
           <p className="text-sm text-muet">
-            {profil.totalAnalyses} copie(s) analysée(s) sur cet appareil.
+            {profil.totalAnalyses} paper(s) analysed on this device.
           </p>
           <div className="mt-3">
             <Bouton variante="secondaire" onClick={() => aller('profil')}>
-              Voir mon profil d’erreur
+              See my error profile
             </Bouton>
           </div>
         </Carte>

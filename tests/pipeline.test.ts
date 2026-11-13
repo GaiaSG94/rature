@@ -70,7 +70,7 @@ describe('construction des requêtes', () => {
       annotations: [{ ligne: 'a', annotation: 'faux' }],
       copiePropre: false,
     })
-    expect(message).toContain('1. ligne : a')
+    expect(message).toContain('1. line: a')
   })
 })
 
@@ -164,6 +164,6 @@ describe('étapes pures (ingest et anonymisation)', () => {
 describe('preuves du pipeline', () => {
   it('la liste des codes est dédupliquée et ordonnée', () => {
     expect(codesDe([{ code: 'E01' }, { code: 'E01' }, { code: 'E11' }, { code: 'E04' }])).toBe('E01, E11, E04')
-    expect(codesDe([])).toBe('aucune')
+    expect(codesDe([])).toBe('none')
   })
 })

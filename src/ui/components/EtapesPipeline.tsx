@@ -40,7 +40,7 @@ export function EtapesPipeline({ progression }: Props) {
             </li>
             {etat?.preuve ? (
               <li className="-mt-1 ml-6 rounded-lg border border-bord bg-surface-2 px-3 py-2 text-xs text-muet">
-                <span className="text-vert">preuve : </span>
+                <span className="text-vert">proof: </span>
                 {etat.preuve}
               </li>
             ) : null}

@@ -26,8 +26,8 @@ export type AnalyseFusionnee = { extraction: Extraction; erreurs: Erreur[] }
 
 export function messageAnalyse(): string {
   return [
-    'Voici la photo d’une copie corrigée.',
-    'Relève les annotations du professeur et type chacune dans la taxonomie, puis rends le JSON demandé.',
+    'Here is the photo of a corrected paper.',
+    "List the teacher's annotations and type each one in the taxonomy, then return the requested JSON.",
   ].join(' ')
 }
 

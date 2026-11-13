@@ -65,6 +65,6 @@ describe('mode démonstration', () => {
     const copie = COPIES_DEMO.find((c) => !c.enregistrement.reponses.revue)
     if (!copie) return // toutes les copies ont une revue enregistrée : rien à tester
     const client = clientDemoPour(copie.id, { attente: false })
-    await expect(client({ system: PROMPT_REVUE, user: 'x' })).rejects.toThrow(/recapturer/)
+    await expect(client({ system: PROMPT_REVUE, user: 'x' })).rejects.toThrow(/recapture/)
   })
 })

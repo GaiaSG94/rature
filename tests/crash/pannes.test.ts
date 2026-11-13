@@ -33,7 +33,7 @@ describe('crash test — pannes réseau et amont', () => {
 
     const erreur = await completer(transport, requete).catch((e: unknown) => e)
     expect(erreur).toBeInstanceOf(ErreurLLM)
-    expect((erreur as ErreurLLM).message).toContain('Réseau indisponible')
+    expect((erreur as ErreurLLM).message).toContain('Network unavailable')
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
@@ -74,7 +74,7 @@ describe('crash test — pannes réseau et amont', () => {
     vi.stubGlobal('fetch', fetchMock)
 
     const erreur = await completer(transport, requete).catch((e: unknown) => e)
-    expect((erreur as ErreurLLM).message).toContain('Colle ta propre clé')
+    expect((erreur as ErreurLLM).message).toContain('Paste your own key')
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
@@ -125,7 +125,7 @@ describe('crash test — pannes réseau et amont', () => {
 
     vi.stubGlobal('fetch', vi.fn().mockImplementation(async () => reponseBrute(200, '{"texte":"   "}')))
     const erreurVide = await completer(transport, requete).catch((e: unknown) => e)
-    expect((erreurVide as ErreurLLM).message).toContain('vide')
+    expect((erreurVide as ErreurLLM).message).toContain('Empty')
   })
 
   it('génération d’exercice en panne : l’erreur remonte, elle n’est pas avalée', async () => {

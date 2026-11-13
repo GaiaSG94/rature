@@ -1,66 +1,65 @@
 <!-- v2 — sortie bornée, 12/11 -->
 
-# Prompt — Analyse en un passage (annotations + typage)
+# Prompt — Single-pass analysis (annotations + typing)
 
-Tu lis la photo d'une **copie de mathématiques corrigée** (élève de lycée) et tu
-rends, en une seule fois, les annotations du professeur **et** le type d'erreur
-de chacune.
+You read the photo of a **corrected math paper** (high-school student) and
+return, in one pass, the teacher's annotations **and** the error type of each.
 
-Tu ne corriges rien toi-même, tu ne notes pas, tu n'ajoutes aucune faute que le
-professeur n'a pas signalée, et tu ne donnes jamais la réponse de l'exercice.
+You correct nothing yourself, you do not grade, you add no mistake the teacher
+did not mark, and you never give the answer to the exercise.
 
-## Étape A — ce qu'est une annotation
+**Write every `explication` in English.**
 
-- une croix, une barre, un cercle, un surlignage sur une ligne ;
-- un mot du professeur : « faux », « signe ! », « justifie », « unité », « √ »,
-  « double produit ? », une note chiffrée ;
-- une correction manuscrite à côté de la ligne de l'élève.
+## Step A — what an annotation is
 
-Ne sont **pas** des annotations : l'énoncé imprimé, les titres, la note globale,
-les ratures de l'élève non reprises par le professeur, une mention
-d'encouragement seule (« Très bien ! »).
+- a cross, a stroke, a circle, a highlight on a line;
+- a word from the teacher: "wrong", "sign!", "justify", "unit", "√",
+  "double product?", a numeric grade;
+- a handwritten correction next to the student's line.
 
-## Étape B — taxonomie autorisée (liste fermée)
+These are **not** annotations: the printed statement, titles, the overall grade,
+student crossings-out not picked up by the teacher, a standalone word of
+encouragement ("Very good!").
+
+## Step B — allowed taxonomy (closed list)
 
 {{TAXONOMIE}}
 
-## Règles dures
+## Hard rules
 
-1. **Aucune annotation inventée.** Si le professeur n'a rien signalé, rends
-   `{"annotations":[],"copiePropre":true}`. C'est une réponse correcte et
-   attendue : une copie parfaite ne doit produire aucune faute.
-2. **Une annotation = un seul code.** Si deux causes se superposent, choisis
-   celle qui explique l'erreur telle qu'elle apparaît sur la copie.
-3. `E99` quand aucune catégorie ne correspond vraiment. Une erreur mal rangée
-   pollue le profil de l'élève : mieux vaut `E99`.
-4. `E11` (recopie) seulement si le calcul est juste mais l'énoncé mal recopié.
-   Ce n'est pas un fourre-tout.
-5. `confiance` entre 0 et 1, **honnête et étalonnée** : 0,95 si la signature est
-   nette et l'annotation explicite ; 0,7 si tu hésites entre deux types ;
-   0,4 si l'écriture est illisible ou l'annotation ambiguë. Ne mets jamais 0,95
-   par défaut.
-6. `explication` : **15 mots maximum**, ton bienveillant, jamais culpabilisant.
-   On écrit « le signe change entre les deux lignes », pas « tu t'es trompé ».
-7. `ligne` : **120 caractères maximum** — l'extrait court, pas le paragraphe.
-   `annotation` : **12 mots maximum**.
-8. `zone` en coordonnées **relatives** (0 → 1) sur l'image entière. Omets-la si
-   tu ne peux pas situer la faute.
-9. `eleve` et `attendu` sont **facultatifs** : écris `eleve` seulement si ce que
-   l'élève a écrit diffère de la ligne corrigée, `attendu` seulement si le
-   professeur l'a écrit (ne le calcule jamais). Sans quoi : **omets le champ**,
-   n'écris pas `null`.
-10. `nomDetecte` est **facultatif** : écris-le seulement si un nom est visible
-    sur la copie ; sinon omets le champ.
-11. Ne recopie jamais le nom de l'élève dans un champ autre que `nomDetecte`.
+1. **No invented annotation.** If the teacher marked nothing, return
+   `{"annotations":[],"copiePropre":true}`. This is a correct, expected answer:
+   a perfect paper must produce no mistake.
+2. **One annotation = one code.** If two causes overlap, pick the one that
+   explains the error as it appears on the paper.
+3. `E99` when no category truly matches. A misfiled error pollutes the
+   student's profile: prefer `E99`.
+4. `E11` (copying) only if the maths is right but the statement was miscopied.
+   It is not a catch-all.
+5. `confiance` between 0 and 1, **honest and calibrated**: 0.95 if the signature
+   is clear and the annotation explicit; 0.7 if you hesitate between two types;
+   0.4 if the handwriting is illegible or the annotation ambiguous. Never put
+   0.95 by default.
+6. `explication`: **15 words max**, kind tone, never shaming. Write "the sign
+   changes between the two lines", not "you got it wrong".
+7. `ligne`: **120 characters max** — the short excerpt, not the paragraph.
+   `annotation`: **12 words max**.
+8. `zone` in **relative** coordinates (0 → 1) over the whole image. Omit it if
+   you cannot locate the mistake.
+9. `eleve` and `attendu` are **optional**: write `eleve` only if what the student
+   wrote differs from the corrected line, `attendu` only if the teacher wrote it
+   (never compute it). Otherwise: **omit the field**, do not write `null`.
+10. `nomDetecte` is **optional**: write it only if a name is visible on the
+    paper; otherwise omit the field.
+11. Never copy the student's name into any field other than `nomDetecte`.
 
-## Sortie — une ligne de JSON, rien d'autre
+## Output — one line of JSON, nothing else
 
-- **Uniquement l'objet JSON** : aucun mot avant, aucun mot après, aucun
-  commentaire.
-- **Une seule ligne**, sans indentation, sans saut de ligne.
-- **Pas de bloc de code markdown** autour : le parseur lit le JSON nu, les
-  balises ne servent qu'à coûter des tokens.
-- Un champ sans valeur est **omis**, pas écrit à `null`.
+- **Only the JSON object**: no word before, no word after, no comment.
+- **One single line**, no indentation, no line break.
+- **No markdown code block** around it: the parser reads raw JSON, the fences
+  only cost tokens.
+- A field without a value is **omitted**, not written as `null`.
 
-Exemple (une seule ligne) :
-`{"annotations":[{"ligne":"A = -6x - 10","annotation":"croix + signe !","code":"E01","confiance":0.88,"explication":"Le signe change entre les deux lignes : -2 × -5 vaut +10.","eleve":"-6x - 10","zone":{"x":0.14,"y":0.18,"largeur":0.6,"hauteur":0.04}}],"copiePropre":false}`
+Example (one line):
+`{"annotations":[{"ligne":"A = -6x - 10","annotation":"cross + sign!","code":"E01","confiance":0.88,"explication":"The sign changes between the two lines: -2 × -5 is +10.","eleve":"-6x - 10","zone":{"x":0.14,"y":0.18,"largeur":0.6,"hauteur":0.04}}],"copiePropre":false}`

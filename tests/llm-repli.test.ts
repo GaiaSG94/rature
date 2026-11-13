@@ -62,7 +62,7 @@ describe('repli sur la chaîne de modèles', () => {
 
     const erreur = await completer(transport, requete).catch((e: unknown) => e)
     expect(erreur).toBeInstanceOf(ErreurLLM)
-    expect((erreur as ErreurLLM).message).toContain('Colle ta propre clé')
+    expect((erreur as ErreurLLM).message).toContain('Paste your own key')
     expect(enregistrerAppels(fetchMock)).toHaveLength(1)
   })
 
@@ -134,7 +134,7 @@ describe('repli sur la chaîne de modèles', () => {
       requete,
     )
     expect(reponse).toBe('ok')
-    expect(progres.join(' ')).toContain('essai 1')
+    expect(progres.join(' ')).toContain('attempt 1')
     expect(modeles).toEqual(['ag/claude-sonnet-4-6'])
   })
 

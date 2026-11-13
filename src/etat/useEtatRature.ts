@@ -111,7 +111,7 @@ export function transportDe(
 }
 
 export function messageErreur(erreur: unknown): string {
-  return erreur instanceof Error ? erreur.message : 'Analyse impossible. Réessaie dans un instant.'
+  return erreur instanceof Error ? erreur.message : 'Analysis failed. Try again in a moment.'
 }
 
 /** Réseau ou amont épuisé : c'est le signal qui allume la pastille « ko ». */
