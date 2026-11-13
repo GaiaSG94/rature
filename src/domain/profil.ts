@@ -82,9 +82,9 @@ export function pourcentage(part: number): number {
  */
 export function phraseSynthese(profil: Profil): string {
   const dominant = typeDominant(profil)
-  if (!dominant) return "Pas encore d'erreur récurrente : ajoute une copie corrigée."
+  if (!dominant) return 'No recurring mistake yet: add a corrected paper.'
   const part = pourcentage(partDuType(profil, dominant))
-  return `${part} % de tes erreurs : ${libelleDe(dominant).toLowerCase()}`
+  return `${part}% of your mistakes: ${libelleDe(dominant).toLowerCase()}`
 }
 
 /** Série triée par fréquence décroissante, pour les barres de la vue Profil. */

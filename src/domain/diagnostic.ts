@@ -33,8 +33,8 @@ export function normaliserErreur(brute: ErreurBrute): Erreur {
   return {
     code,
     libelle: libelleDe(code),
-    ligne: texteAssaini(brute.ligne, 'Ligne non localisée'),
-    explication: texteAssaini(brute.explication, 'À revoir avec ton professeur.'),
+    ligne: texteAssaini(brute.ligne, 'Line not located'),
+    explication: texteAssaini(brute.explication, 'To review with your teacher.'),
     confiance,
     ponderee: estPonderee(code),
     ...(zone ? { zone } : {}),

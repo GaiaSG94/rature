@@ -8,8 +8,8 @@
  * devient donc **instantanée et hors ligne** ; l'appel modèle ne sert plus que
  * pour un « exercice inédit » demandé explicitement.
  *
- * Chaque énoncé fait faire le geste décrit par la `signature` du code dans
- * `taxonomy.ts` — pas un exercice sur la notion en général.
+ * Énoncés en anglais (le produit est en anglais). Chaque énoncé fait faire le
+ * geste décrit par la `signature` du code dans `taxonomy.ts`.
  */
 import { CODES_ERREUR, libelleDe } from './taxonomy'
 import type { Exercice, ExerciceVerifie, VerdictGardeFou } from './types'
@@ -48,66 +48,69 @@ function exercice(
   return { id: `${code}-${numero}`, code, niveau, difficulte: numero, enonce, indices: [indice], solution, piege }
 }
 
+const G10 = 'Grade 10'
+const G11 = 'Grade 11'
+
 export const BANQUE: Record<CodeBanque, ExerciceBanque[]> = {
   E01: [
-    exercice('E01', 1, 'seconde', 'Développe : A = -3(2x - 4)', 'Écris d’abord -3 × 2x puis -3 × (-4), séparément.', 'A = -6x + 12. Le point clé : -3 × (-4) = +12, le signe change.', 'Le produit de deux négatifs est positif.'),
-    exercice('E01', 2, 'seconde', 'Développe et réduis : B = 5x - 2(x - 3)', 'Traîne le signe du facteur -2 sur chacun des deux termes.', 'B = 5x - 2x + 6 = 3x + 6. Ici -2 × (-3) = +6.', 'Le facteur négatif doit toucher les deux termes.'),
-    exercice('E01', 3, 'seconde', 'Développe et réduis : C = -(x + 7) + 2(3 - x)', 'Un signe « - » devant une parenthèse, c’est un facteur -1.', 'C = -x - 7 + 6 - 2x = -3x - 1.', 'Deux facteurs négatifs différents dans le même calcul.'),
+    exercice('E01', 1, G10, 'Expand: A = -3(2x - 4)', 'Write -3 × 2x then -3 × (-4) separately first.', 'A = -6x + 12. Key point: -3 × (-4) = +12, the sign changes.', 'The product of two negatives is positive.'),
+    exercice('E01', 2, G10, 'Expand and reduce: B = 5x - 2(x - 3)', 'Carry the -2 factor onto both terms.', 'B = 5x - 2x + 6 = 3x + 6. Here -2 × (-3) = +6.', 'The negative factor must reach both terms.'),
+    exercice('E01', 3, G10, 'Expand and reduce: C = -(x + 7) + 2(3 - x)', 'A "-" sign in front of parentheses is a factor of -1.', 'C = -x - 7 + 6 - 2x = -3x - 1.', 'Two different negative factors in the same computation.'),
   ],
   E02: [
-    exercice('E02', 1, 'seconde', 'Développe : A = 4(3x + 5)', 'Le 4 multiplie le 3x ET le 5.', 'A = 12x + 20.', 'Oublier de multiplier le second terme.'),
-    exercice('E02', 2, 'seconde', 'Développe et réduis : B = x(2x + 3) - 2', 'Deux termes dans la parenthèse, donc deux produits.', 'B = 2x² + 3x - 2.', 'Le -2 final n’a rien à voir avec la distributivité.'),
-    exercice('E02', 3, 'seconde', 'Développe : C = (x + 2)(x + 5)', 'Double distributivité : quatre produits au total.', 'C = x² + 5x + 2x + 10 = x² + 7x + 10.', 'Oublier les produits croisés.'),
+    exercice('E02', 1, G10, 'Expand: A = 4(3x + 5)', 'The 4 multiplies the 3x AND the 5.', 'A = 12x + 20.', 'Forgetting to multiply the second term.'),
+    exercice('E02', 2, G10, 'Expand and reduce: B = x(2x + 3) - 2', 'Two terms in the parentheses, so two products.', 'B = 2x² + 3x - 2.', 'The final -2 has nothing to do with distributivity.'),
+    exercice('E02', 3, G10, 'Expand: C = (x + 2)(x + 5)', 'Double distributivity: four products in all.', 'C = x² + 5x + 2x + 10 = x² + 7x + 10.', 'Forgetting the cross products.'),
   ],
   E03: [
-    exercice('E03', 1, 'seconde', 'Développe : A = (x + 4)²', 'Récite : carré, double produit, carré.', 'A = x² + 8x + 16. Le double produit est 2 × x × 4 = 8x.', 'Croire que (a+b)² = a² + b².'),
-    exercice('E03', 2, 'seconde', 'Développe : B = (3x - 2)²', 'Le signe du double produit suit celui du second terme.', 'B = 9x² - 12x + 4.', 'Oublier le carré du coefficient 3, ou le signe du -12x.'),
-    exercice('E03', 3, 'seconde', 'Développe : C = (x + 6)(x - 6)', 'C’est la troisième identité remarquable.', 'C = x² - 36.', 'Écrire x² + 36 au lieu de x² - 36.'),
+    exercice('E03', 1, G10, 'Expand: A = (x + 4)²', 'Recite: square, double product, square.', 'A = x² + 8x + 16. The double product is 2 × x × 4 = 8x.', 'Thinking (a+b)² = a² + b².'),
+    exercice('E03', 2, G10, 'Expand: B = (3x - 2)²', 'The sign of the double product follows the second term.', 'B = 9x² - 12x + 4.', 'Forgetting the square of the coefficient 3, or the sign of -12x.'),
+    exercice('E03', 3, G10, 'Expand: C = (x + 6)(x - 6)', 'This is the third special product.', 'C = x² - 36.', 'Writing x² + 36 instead of x² - 36.'),
   ],
   E04: [
-    exercice('E04', 1, 'seconde', 'Calcule : A = 1/2 + 1/3', 'Cherche un dénominateur commun avant d’additionner.', 'A = 3/6 + 2/6 = 5/6.', 'Additionner aussi les dénominateurs.'),
-    exercice('E04', 2, 'seconde', 'Calcule : B = 3/4 - 1/6', 'Sur 12, ajuste chaque numérateur.', 'B = 9/12 - 2/12 = 7/12.', 'Oublier d’ajuster le numérateur quand on change le dénominateur.'),
-    exercice('E04', 3, 'seconde', 'Calcule et simplifie : C = 2/5 + 1/2 - 1/10', 'Trois fractions, un seul dénominateur commun.', 'C = 4/10 + 5/10 - 1/10 = 8/10 = 4/5.', 'Traiter les trois termes deux par deux et se tromper de dénominateur.'),
+    exercice('E04', 1, G10, 'Compute: A = 1/2 + 1/3', 'Find a common denominator before adding.', 'A = 3/6 + 2/6 = 5/6.', 'Adding the denominators too.'),
+    exercice('E04', 2, G10, 'Compute: B = 3/4 - 1/6', 'Over 12, adjust each numerator.', 'B = 9/12 - 2/12 = 7/12.', 'Forgetting to adjust the numerator when the denominator changes.'),
+    exercice('E04', 3, G10, 'Compute and simplify: C = 2/5 + 1/2 - 1/10', 'Three fractions, one common denominator.', 'C = 4/10 + 5/10 - 1/10 = 8/10 = 4/5.', 'Taking the three terms two at a time and getting the denominator wrong.'),
   ],
   E05: [
-    exercice('E05', 1, 'première', 'Résous f(x) = 0 pour f(x) = (x - 3)/(x + 2), en précisant le domaine.', 'Une fraction n’existe pas si son dénominateur vaut zéro.', 'Domaine : x ≠ -2. f(x) = 0 ⇔ x - 3 = 0 ⇔ x = 3, qui est bien dans le domaine.', 'Oublier la valeur interdite.'),
-    exercice('E05', 2, 'seconde', 'Résous x² = 9.', 'Un carré a deux racines, pas une.', 'x = 3 ou x = -3.', 'Ne donner que la racine positive.'),
-    exercice('E05', 3, 'première', 'Résous √(x - 1) = 2 en discutant le domaine.', 'Une racine carrée exige un contenu positif ou nul.', 'Domaine : x ≥ 1. En élevant au carré : x - 1 = 4 donc x = 5, qui vérifie le domaine.', 'Élever au carré sans vérifier que la solution convient.'),
+    exercice('E05', 1, G11, 'Solve f(x) = 0 for f(x) = (x - 3)/(x + 2), stating the domain.', 'A fraction does not exist where its denominator is zero.', 'Domain: x ≠ -2. f(x) = 0 ⇔ x - 3 = 0 ⇔ x = 3, which is in the domain.', 'Forgetting the forbidden value.'),
+    exercice('E05', 2, G10, 'Solve x² = 9.', 'A square has two roots, not one.', 'x = 3 or x = -3.', 'Giving only the positive root.'),
+    exercice('E05', 3, G11, 'Solve √(x - 1) = 2, discussing the domain.', 'A square root needs a non-negative content.', 'Domain: x ≥ 1. Squaring: x - 1 = 4 so x = 5, which satisfies the domain.', 'Squaring without checking the solution fits.'),
   ],
   E06: [
-    exercice('E06', 1, 'seconde', 'Écris sous la forme a × xⁿ : A = (2x)³', 'L’exposant porte sur TOUT ce qui est dans la parenthèse.', 'A = 2³ × x³ = 8x³.', 'N’élever que le x et oublier le 2.'),
-    exercice('E06', 2, 'seconde', 'Simplifie : B = x⁵ × x²', 'Quand on multiplie, les exposants s’additionnent.', 'B = x⁷ : quand on multiplie, les exposants s’additionnent.', 'Multiplier les exposants au lieu de les additionner.'),
-    exercice('E06', 3, 'première', 'Simplifie : C = (3x²)² ÷ x³', 'Commence par la puissance du produit.', 'C = 9x⁴ ÷ x³ = 9x.', 'Quand on divise, les exposants se soustraient.'),
+    exercice('E06', 1, G10, 'Write as a × xⁿ: A = (2x)³', 'The exponent applies to EVERYTHING in the parentheses.', 'A = 2³ × x³ = 8x³.', 'Raising only the x and forgetting the 2.'),
+    exercice('E06', 2, G10, 'Simplify: B = x⁵ × x²', 'When multiplying, exponents add.', 'B = x⁷: when multiplying, exponents add.', 'Multiplying the exponents instead of adding them.'),
+    exercice('E06', 3, G11, 'Simplify: C = (3x²)² ÷ x³', 'Start with the power of the product.', 'C = 9x⁴ ÷ x³ = 9x.', 'When dividing, exponents subtract.'),
   ],
   E07: [
-    exercice('E07', 1, 'seconde', 'Calcule : A = √(9 + 16)', 'Calcule d’abord ce qui est sous la racine.', 'A = √25 = 5. Et non 3 + 4.', 'Croire que la racine d’une somme est la somme des racines.'),
-    exercice('E07', 2, 'seconde', 'Simplifie : B = √50', 'Cherche le plus grand carré parfait diviseur de 50.', 'B = √(25 × 2) = 5√2.', 'Répondre 25√2 en oubliant la racine sur 25.'),
-    exercice('E07', 3, 'première', 'Simplifie : C = √12 + √27', 'Même méthode sur chaque racine, puis regroupe.', 'C = 2√3 + 3√3 = 5√3.', 'Additionner les nombres sous les racines.'),
+    exercice('E07', 1, G10, 'Compute: A = √(9 + 16)', 'First compute what is under the root.', 'A = √25 = 5. Not 3 + 4.', 'Thinking the root of a sum is the sum of the roots.'),
+    exercice('E07', 2, G10, 'Simplify: B = √50', 'Find the largest perfect square dividing 50.', 'B = √(25 × 2) = 5√2.', 'Answering 25√2, forgetting the root over 25.'),
+    exercice('E07', 3, G11, 'Simplify: C = √12 + √27', 'Same method on each root, then group.', 'C = 2√3 + 3√3 = 5√3.', 'Adding the numbers under the roots.'),
   ],
   E08: [
-    exercice('E08', 1, 'seconde', 'Résous : 3x + 7 = 22', 'Écris l’opération inverse appliquée des DEUX côtés.', '3x = 22 - 7 = 15, donc x = 5.', 'Additionner 7 au lieu de le soustraire.'),
-    exercice('E08', 2, 'seconde', 'Résous : 5x - 4 = 2x + 11', 'Regroupe les x d’un côté, les nombres de l’autre.', '3x = 15, donc x = 5.', 'Changer le signe d’un terme en le faisant passer de l’autre côté.'),
-    exercice('E08', 3, 'seconde', 'Résous : (x + 3)/2 = 7', 'Que faut-il faire pour se débarrasser du dénominateur ?', 'x + 3 = 14, donc x = 11.', 'Diviser au lieu de multiplier des deux côtés.'),
+    exercice('E08', 1, G10, 'Solve: 3x + 7 = 22', 'Write the inverse operation applied to BOTH sides.', '3x = 22 - 7 = 15, so x = 5.', 'Adding 7 instead of subtracting it.'),
+    exercice('E08', 2, G10, 'Solve: 5x - 4 = 2x + 11', 'Group the x on one side, the numbers on the other.', '3x = 15, so x = 5.', 'Changing the sign of a term as it moves across.'),
+    exercice('E08', 3, G10, 'Solve: (x + 3)/2 = 7', 'What must you do to clear the denominator?', 'x + 3 = 14, so x = 11.', 'Dividing instead of multiplying both sides.'),
   ],
   E09: [
-    exercice('E09', 1, 'seconde', 'Une voiture roule à 100/3 km/h. Quelle distance en 7 h ? Garde la valeur exacte.', 'N’arrondis pas avant la dernière ligne.', 'd = (100/3) × 7 = 700/3 km, soit environ 233,33 km.', 'Arrondir 100/3 à 33 trop tôt.'),
-    exercice('E09', 2, 'seconde', 'Calcule exactement : A = (2/3) × (9/4)', 'Simplifie avant de multiplier si possible.', 'A = 18/12 = 3/2.', 'Donner 1,5 alors qu’on demande la valeur exacte.'),
-    exercice('E09', 3, 'première', 'Exprime 3√2 exactement, puis arrondis au centième.', 'La valeur exacte reste sous forme de racine.', '3√2 ≈ 4,24 (car √2 ≈ 1,41421).', 'Arrondir √2 à 1,4 puis multiplier : on perd la précision.'),
+    exercice('E09', 1, G10, 'A car travels at 100/3 km/h. How far in 7 h? Keep the exact value.', 'Do not round before the last line.', 'd = (100/3) × 7 = 700/3 km, about 233.33 km.', 'Rounding 100/3 to 33 too early.'),
+    exercice('E09', 2, G10, 'Compute exactly: A = (2/3) × (9/4)', 'Simplify before multiplying if possible.', 'A = 18/12 = 3/2.', 'Giving 1.5 when the exact value is asked.'),
+    exercice('E09', 3, G11, 'Give 3√2 exactly, then round to the hundredth.', 'The exact value stays as a root.', '3√2 ≈ 4.24 (since √2 ≈ 1.41421).', 'Rounding √2 to 1.4 then multiplying: precision is lost.'),
   ],
   E10: [
-    exercice('E10', 1, 'seconde', 'Un rectangle mesure 3 m sur 2,5 m. Donne son aire, avec l’unité.', 'Une aire s’exprime en unités carrées.', 'A = 3 × 2,5 = 7,5 m².', 'Oublier l’unité, ou écrire m au lieu de m².'),
-    exercice('E10', 2, 'seconde', 'Convertis 2 h 30 min en heures décimales.', '30 minutes valent une demi-heure.', '2 h 30 = 2,5 h.', 'Écrire 2,3 h en collant les chiffres.'),
-    exercice('E10', 3, 'première', 'Convertis 90 km/h en m/s.', '1 km = 1000 m et 1 h = 3600 s.', '90 × 1000 ÷ 3600 = 25 m/s.', 'Multiplier au lieu de diviser par 3,6.'),
+    exercice('E10', 1, G10, 'A rectangle is 3 m by 2.5 m. Give its area, with the unit.', 'An area is in square units.', 'A = 3 × 2.5 = 7.5 m².', 'Forgetting the unit, or writing m instead of m².'),
+    exercice('E10', 2, G10, 'Convert 2 h 30 min into decimal hours.', '30 minutes is half an hour.', '2 h 30 = 2.5 h.', 'Writing 2.3 h by sticking the digits together.'),
+    exercice('E10', 3, G11, 'Convert 90 km/h into m/s.', '1 km = 1000 m and 1 h = 3600 s.', '90 × 1000 ÷ 3600 = 25 m/s.', 'Multiplying instead of dividing by 3.6.'),
   ],
   E11: [
-    exercice('E11', 1, 'seconde', 'Recopie l’équation 4x + 9 = 25, puis résous-la.', 'Relis ta recopie chiffre par chiffre avant de calculer.', '4x = 16, donc x = 4.', 'Recopier 4x - 9 ou 4x + 6 et juste ensuite.'),
-    exercice('E11', 2, 'seconde', 'Recopie 3(x - 2) + 5, puis développe.', 'Entoure les nombres recopiés pour les vérifier.', '3x - 6 + 5 = 3x - 1.', 'Recopier 3(x + 2) et développer correctement… la mauvaise expression.'),
-    exercice('E11', 3, 'première', 'Recopie la fraction (x + 1)/(x - 2), puis donne son domaine.', 'Le dénominateur est le point sensible à recopier.', 'Domaine : x ≠ 2.', 'Recopier x + 2 au dénominateur et conclure x ≠ -2.'),
+    exercice('E11', 1, G10, 'Copy the equation 4x + 9 = 25, then solve it.', 'Reread your copy digit by digit before computing.', '4x = 16, so x = 4.', 'Copying 4x - 9 or 4x + 6 and solving right after.'),
+    exercice('E11', 2, G10, 'Copy 3(x - 2) + 5, then expand.', 'Circle the copied numbers to check them.', '3x - 6 + 5 = 3x - 1.', 'Copying 3(x + 2) and expanding the wrong expression correctly.'),
+    exercice('E11', 3, G11, 'Copy the fraction (x + 1)/(x - 2), then give its domain.', 'The denominator is the delicate part to copy.', 'Domain: x ≠ 2.', 'Copying x + 2 in the denominator and concluding x ≠ -2.'),
   ],
   E12: [
-    exercice('E12', 1, 'seconde', 'Montre que x = 2 est solution de 3x - 1 = 5, en écrivant chaque étape.', 'Remplace, calcule, puis conclus par une phrase.', '3 × 2 - 1 = 6 - 1 = 5. Donc 2 est bien solution.', 'Écrire seulement « x = 2 » sans vérification.'),
-    exercice('E12', 2, 'seconde', 'Résous x² = 25 en justifiant chaque passage.', 'Nomme la propriété que tu utilises.', 'x² = 25 ⇔ x² - 25 = 0 ⇔ (x - 5)(x + 5) = 0, donc x = 5 ou x = -5.', 'Donner les deux solutions sans expliquer d’où elles viennent.'),
-    exercice('E12', 3, 'première', 'Prouve que la somme de deux entiers pairs est paire.', 'Pose deux entiers pairs avec des variables, puis factorise.', 'Soit 2a et 2b. Leur somme est 2a + 2b = 2(a + b), qui est un multiple de 2 : elle est paire.', 'Affirmer le résultat sans passer par les variables.'),
+    exercice('E12', 1, G10, 'Show that x = 2 is a solution of 3x - 1 = 5, writing each step.', 'Substitute, compute, then conclude with a sentence.', '3 × 2 - 1 = 6 - 1 = 5. So 2 is indeed a solution.', 'Writing only "x = 2" with no check.'),
+    exercice('E12', 2, G10, 'Solve x² = 25, justifying each step.', 'Name the property you use.', 'x² = 25 ⇔ x² - 25 = 0 ⇔ (x - 5)(x + 5) = 0, so x = 5 or x = -5.', 'Giving both solutions without explaining where they come from.'),
+    exercice('E12', 3, G11, 'Prove that the sum of two even integers is even.', 'Write two even integers with variables, then factor.', 'Let 2a and 2b. Their sum is 2a + 2b = 2(a + b), a multiple of 2: it is even.', 'Claiming the result without using variables.'),
   ],
 }
 
@@ -156,6 +159,6 @@ export function exerciceVerifie(exercice: ExerciceBanque): ExerciceVerifie {
 /** Libellé affiché pour signaler l'origine de l'exercice. */
 export function origineExercice(exercice: Exercice): string {
   return exercice.tentative === 0
-    ? `Exercice de la banque locale (${libelleDe(exercice.typeTravaille)}) — aucun appel réseau.`
-    : 'Exercice inédit, généré et vérifié par le modèle.'
+    ? `From the local bank (${libelleDe(exercice.typeTravaille)}) — no network call.`
+    : 'Fresh exercise, generated and checked by the model.'
 }

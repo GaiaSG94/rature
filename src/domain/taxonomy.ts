@@ -4,6 +4,9 @@
  * Le modèle n'invente jamais de catégorie : il doit choisir parmi ces 12 codes,
  * ou répondre E99 (« non typée ») qui est exclue du profil. C'est ce verrou qui
  * rend le diagnostic mesurable et défendable (cf. RATURE.md §17).
+ *
+ * Libellés et signatures en anglais : le produit est en anglais, et les
+ * signatures servent de garde-fou dans les prompts (le modèle répond en anglais).
  */
 
 export const CODES_ERREUR = [
@@ -34,77 +37,77 @@ export type TypeErreur = {
 export const TAXONOMIE: readonly TypeErreur[] = [
   {
     code: 'E01',
-    libelle: 'Signe perdu',
+    libelle: 'Lost sign',
     signature:
-      "Changement de signe non justifié entre deux lignes, typiquement au développement.",
+      'Unjustified sign change between two lines, typically while expanding.',
   },
   {
     code: 'E02',
-    libelle: 'Développement incomplet',
+    libelle: 'Incomplete expansion',
     signature:
-      "Distributivité partielle : un terme de la parenthèse n'est pas multiplié.",
+      'Partial distributivity: one term inside the parentheses is not multiplied.',
   },
   {
     code: 'E03',
-    libelle: 'Identité remarquable mal appliquée',
-    signature: '(a+b)² développé en a²+b², ou signe du double produit erroné.',
+    libelle: 'Misused special product',
+    signature: '(a+b)² expanded as a²+b², or wrong sign on the double product.',
   },
   {
     code: 'E04',
-    libelle: 'Dénominateur commun erroné',
+    libelle: 'Wrong common denominator',
     signature:
-      'Somme de fractions : dénominateurs mal combinés, numérateur non ajusté.',
+      'Sum of fractions: denominators combined wrongly, numerators not adjusted.',
   },
   {
     code: 'E05',
-    libelle: 'Cas particulier oublié',
+    libelle: 'Forgotten special case',
     signature:
-      'Division par zéro, valeur exclue du domaine, racine négative non discutée.',
+      'Division by zero, value excluded from the domain, negative root left undiscussed.',
   },
   {
     code: 'E06',
-    libelle: 'Puissance mal gérée',
+    libelle: 'Mishandled power',
     signature:
-      "Exposant appliqué à une partie seulement, règles de puissances confondues.",
+      'Exponent applied to only part of the factor, power rules confused.',
   },
   {
     code: 'E07',
-    libelle: 'Racine mal simplifiée',
-    signature: '√(a+b) décomposé en √a+√b, simplification incorrecte.',
+    libelle: 'Wrongly simplified root',
+    signature: '√(a+b) split into √a+√b, incorrect simplification.',
   },
   {
     code: 'E08',
-    libelle: 'Transposition fautive',
+    libelle: 'Faulty transposition',
     signature:
-      "Passage d'un membre à l'autre sans opération inverse correcte.",
+      'Moving a term across the equals sign without the correct inverse operation.',
   },
   {
     code: 'E09',
-    libelle: 'Arrondi / précision',
+    libelle: 'Rounding / precision',
     signature:
-      "Arrondi prématuré, propagation d'erreur, valeur exacte remplacée trop tôt.",
+      'Premature rounding, error propagation, exact value replaced too early.',
   },
   {
     code: 'E10',
-    libelle: 'Unité manquante ou conversion',
-    signature: 'Résultat sans unité, conversion incohérente.',
+    libelle: 'Missing unit or conversion',
+    signature: 'Result with no unit, inconsistent conversion.',
   },
   {
     code: 'E11',
-    libelle: 'Erreur de recopie',
+    libelle: 'Copying mistake',
     signature:
-      "Inattention : l'énoncé ou la ligne précédente est mal recopié, calcul correct ensuite.",
+      'Carelessness: the statement or previous line is miscopied, the maths afterwards is correct.',
   },
   {
     code: 'E12',
-    libelle: 'Conclusion non justifiée',
+    libelle: 'Unjustified conclusion',
     signature:
-      'Raisonnement valide mais étape logique manquante ou affirmation non démontrée.',
+      'Valid reasoning but a logical step is missing or a claim is left unproven.',
   },
 ] as const
 
 export const CODE_NON_TYPEE: CodeErreur = 'E99'
-export const LIBELLE_NON_TYPEE = 'Non typée'
+export const LIBELLE_NON_TYPEE = 'Untyped'
 
 const PAR_CODE = new Map<string, TypeErreur>(TAXONOMIE.map((t) => [t.code, t]))
 
@@ -114,7 +117,7 @@ export function libelleDe(code: CodeErreur): string {
 }
 
 export function signatureDe(code: CodeErreur): string {
-  if (code === CODE_NON_TYPEE) return 'Aucun type ne correspond avec confiance suffisante.'
+  if (code === CODE_NON_TYPEE) return 'No type matches with sufficient confidence.'
   return PAR_CODE.get(code)?.signature ?? ''
 }
 

@@ -33,23 +33,23 @@ const SEUIL_DEUXIEME_TYPE = 0.2
 
 /** Consignes collectives, une par type — contenu statique, jamais généré. */
 const CONSIGNES: Record<(typeof CODES_ERREUR)[number], string> = {
-  E01: 'Cinq développements avec un facteur négatif, à faire au tableau en nommant chaque signe.',
-  E02: 'Trois doubles distributivités où chaque terme de la parenthèse est multiplié, à vérifier en binôme.',
-  E03: 'Quatre identités remarquables à développer en écrivant les trois termes, dont le double produit.',
-  E04: 'Trois sommes de fractions à mettre au même dénominateur en réécrivant chaque numérateur ajusté.',
-  E05: 'Cinq équations à résoudre en discutant les valeurs exclues du domaine avant de conclure.',
-  E06: 'Quatre calculs de puissances à détailler en appliquant chaque règle d’exposant, étape par étape.',
-  E07: 'Trois simplifications de racines à justifier en gardant chaque facteur sous le radical.',
-  E08: 'Cinq équations à transposer en nommant l’opération inverse appliquée à chaque membre.',
-  E09: 'Trois calculs à mener en valeurs exactes jusqu’au dernier pas, puis arrondir une seule fois.',
-  E10: 'Quatre énoncés à résoudre en écrivant l’unité à chaque résultat et en vérifiant les conversions.',
-  E11: 'Relire l’énoncé à voix haute avant de démarrer, puis pointer la ligne recopiée.',
-  E12: 'Deux démonstrations courtes à compléter en écrivant chaque implication logique qui relie les étapes.',
+  E01: 'Five expansions with a negative factor, done at the board while naming each sign.',
+  E02: 'Three double distributivities where every term in the parentheses is multiplied, checked in pairs.',
+  E03: 'Four special products to expand by writing all three terms, including the double product.',
+  E04: 'Three sums of fractions over a common denominator, rewriting each adjusted numerator.',
+  E05: 'Five equations to solve by discussing the values excluded from the domain before concluding.',
+  E06: 'Four power computations to detail by applying each exponent rule, step by step.',
+  E07: 'Three root simplifications to justify by keeping each factor under the radical.',
+  E08: 'Five equations to transpose by naming the inverse operation applied to each side.',
+  E09: 'Three computations kept in exact values until the last step, then rounded once.',
+  E10: 'Four word problems to solve by writing the unit on every result and checking conversions.',
+  E11: 'Reread the statement aloud before starting, then point to the copied line.',
+  E12: 'Two short proofs to complete by writing each logical implication that links the steps.',
 }
 
 /** Consigne d'un type retenu ; E99 n'étant jamais retenu, ce repli est défensif. */
 function consignePour(code: CodeErreur): string {
-  if (code === 'E99') return 'Reprise ciblée avec la classe.'
+  if (code === 'E99') return 'Targeted review with the class.'
   return CONSIGNES[code]
 }
 
@@ -68,13 +68,13 @@ function typesTries(stats: StatsClasse): CodeErreur[] {
 export function quoiReprendreLundi(stats: StatsClasse): PlanLundi {
   const total = totalPondereStats(stats)
   if (total === 0) {
-    return { types: [], phrase: 'Rien à reprendre en classe entière.', exercices: [], partCumulee: 0 }
+    return { types: [], phrase: 'Nothing to review with the whole class.', exercices: [], partCumulee: 0 }
   }
 
   const classes = typesTries(stats)
   const premier = classes[0]
   if (!premier) {
-    return { types: [], phrase: 'Rien à reprendre en classe entière.', exercices: [], partCumulee: 0 }
+    return { types: [], phrase: 'Nothing to review with the whole class.', exercices: [], partCumulee: 0 }
   }
 
   const second = classes[1]
@@ -87,8 +87,8 @@ export function quoiReprendreLundi(stats: StatsClasse): PlanLundi {
   const libelles = types.map((code) => libelleDe(code).toLowerCase())
   const phrase =
     libelles.length === 1
-      ? `À reprendre lundi : ${libelles[0]}.`
-      : `À reprendre lundi : ${libelles[0]} et ${libelles[1]}.`
+      ? `To review on Monday: ${libelles[0]}.`
+      : `To review on Monday: ${libelles[0]} and ${libelles[1]}.`
 
   return {
     types,

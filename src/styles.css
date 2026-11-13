@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
 /*
- * Tokens de Raturé. Deux couleurs seulement portent du sens :
- *  - jaune  : le diagnostic (ce qu'on a trouvé) ;
- *  - vert   : la progression (le profil qui avance).
- * Aucun rouge : la copie est déjà annotée en rouge par le professeur, on
- * n'ajoute pas de la honte à un document déjà marqué.
+ * Design tokens — Errata shares the visual system of its sibling app:
+ * black ink on white, Inter, uppercase micro-labels, large tight numerals,
+ * serif for study prose. Two colors carry meaning, and no red: the copy is
+ * already marked in red by the teacher, we do not add shame to a marked page.
+ *   - amber : the diagnosis (the recurring error we found) ;
+ *   - green : progress (a type that is now mastered).
  */
 @theme {
-  --color-fond: #0d0f14;
-  --color-surface: #151922;
-  --color-surface-2: #1d222d;
-  --color-bord: #2a3140;
-  --color-texte: #e8eaf0;
-  --color-muet: #9aa3b2;
-  --color-jaune: #f5c518;
-  --color-vert: #3ecf8e;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-fond: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f5f4;
+  --color-bord: #e1e4e2;
+  --color-texte: #0a0d0c;
+  --color-muet: #555b58;
+  --color-faible: #8b918e;
+  --color-jaune: #d97706;
+  --color-jaune-doux: #fff7d6;
+  --color-vert: #16a34a;
+  --color-vert-doux: #dcfce7;
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-lecture: Georgia, "Times New Roman", serif;
 }
 
 html,
@@ -30,17 +35,40 @@ body {
   background: var(--color-fond);
   color: var(--color-texte);
   font-family: var(--font-sans);
-  /* RNF-06 : texte jamais en dessous de 16 px. */
+  /* RNF-06: body text never below 16px. */
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Focus visible partout : navigation clavier obligatoire (RNF-06). */
+/* Visible focus everywhere: keyboard navigation is mandatory (RNF-06). */
 :focus-visible {
-  outline: 3px solid var(--color-jaune);
+  outline: 2px solid var(--color-texte);
   outline-offset: 2px;
   border-radius: 6px;
+}
+
+/* Uppercase micro-label, borrowed from the sibling design system. */
+.etiquette {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-muet);
+}
+
+/* Tabular, tight numerals for counts and scores. */
+.chiffre {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.045em;
+  font-weight: 550;
+}
+
+/* Study prose (statement, correction): serif, like a textbook. */
+.lecture {
+  font-family: var(--font-lecture);
+  line-height: 1.55;
 }
 
 @media (prefers-reduced-motion: reduce) {

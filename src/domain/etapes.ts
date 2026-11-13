@@ -5,12 +5,12 @@ import type { EtapeId } from './types'
  * l'orchestrateur et l'écran d'analyse les lisent ici, jamais en double.
  */
 export const ETAPES: { id: EtapeId; libelle: string }[] = [
-  { id: 'ingest', libelle: 'Lecture de la photo' },
-  { id: 'anonymise', libelle: 'Masquage du nom' },
-  { id: 'extrait', libelle: 'Relevé des annotations du professeur' },
-  { id: 'classifie', libelle: 'Classement dans les 12 types' },
-  { id: 'agrege', libelle: 'Mise à jour de ton profil' },
-  { id: 'genere', libelle: 'Fabrication de l’exercice ciblé' },
+  { id: 'ingest', libelle: 'Reading the photo' },
+  { id: 'anonymise', libelle: 'Masking the name' },
+  { id: 'extrait', libelle: "Reading the teacher's marks" },
+  { id: 'classifie', libelle: 'Sorting into the 12 types' },
+  { id: 'agrege', libelle: 'Updating your profile' },
+  { id: 'genere', libelle: 'Building the targeted exercise' },
 ]
 
 export function libelleEtape(id: EtapeId): string {
