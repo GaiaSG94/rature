@@ -13,7 +13,7 @@ const CLASSES: Record<NonNullable<Props['variante']>, string> = {
   principal:
     'bg-texte text-fond font-bold hover:opacity-90 active:opacity-80 disabled:opacity-40',
   secondaire:
-    'bg-surface text-texte border border-texte hover:bg-surface-2 disabled:opacity-40',
+    'bg-surface text-texte border-[3px] border-texte font-bold ombre-dure hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40',
   discret: 'bg-transparent text-muet hover:text-texte underline underline-offset-4',
 }
 

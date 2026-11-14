@@ -9,8 +9,8 @@ export function BadgeCode({ code, confiance }: Props) {
   return (
     <span
       className={[
-        'inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs',
-        estNonTypee ? 'border-bord text-muet' : 'border-jaune/50 bg-jaune/10 text-jaune',
+        'sticker text-xs',
+        estNonTypee ? 'sticker-blanc' : 'sticker-ambre',
       ].join(' ')}
     >
       <span className="font-mono">{code}</span>

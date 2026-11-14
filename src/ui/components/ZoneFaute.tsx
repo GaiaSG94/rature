@@ -23,7 +23,7 @@ export function ZoneFaute({ index, code, zone, selectionne, onSelect }: Props) {
       aria-pressed={selectionne}
       className={[
         'absolute rounded border-2 transition',
-        selectionne ? 'border-jaune bg-jaune/25 ring-2 ring-jaune/60' : 'border-jaune/70 bg-jaune/10 hover:bg-jaune/20',
+        selectionne ? 'border-texte bg-ambre/35 ring-2 ring-ambre' : 'border-ambre bg-ambre/15 hover:bg-ambre/30',
       ].join(' ')}
       style={{
         left: `${zone.x * 100}%`,
@@ -32,7 +32,7 @@ export function ZoneFaute({ index, code, zone, selectionne, onSelect }: Props) {
         height: `${zone.hauteur * 100}%`,
       }}
     >
-      <span className="absolute -top-3 left-0 rounded bg-jaune px-1 font-mono text-[11px] text-fond">
+      <span className="absolute -top-3 left-0 rounded border border-texte bg-ambre px-1 font-mono text-[11px] text-texte">
         {index + 1}
       </span>
     </button>

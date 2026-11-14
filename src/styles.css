@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — Errata shares the visual system of its sibling app:
- * black ink on white, Inter, uppercase micro-labels, large tight numerals,
- * serif for study prose. Two colors carry meaning, and no red: the copy is
- * already marked in red by the teacher, we do not add shame to a marked page.
+ * Design tokens — "Stickers" direction (planches v6, E3): electric-blue page,
+ * a white sheet on top, heavy black condensed type, and stickers (thick black
+ * outline + hard shadow). Two colors still carry meaning, and no red: the copy
+ * is already marked in red by the teacher, we do not add shame to a marked page.
  *   - amber : the diagnosis (the recurring error we found) ;
  *   - green : progress (a type that is now mastered).
  */
 @theme {
   --color-fond: #ffffff;
+  --color-bleu: #2337f0;
+  --color-bleu-fonce: #1a2bd0;
+  --color-ambre: #f2a516;
+  --color-menthe: #43d18c;
+  --color-rose: #ff9fd4;
   --color-surface: #ffffff;
   --color-surface-2: #f4f5f4;
   --color-bord: #e1e4e2;
-  --color-texte: #0a0d0c;
+  --color-texte: #0d0d0d;
   --color-muet: #555b58;
   --color-faible: #8b918e;
-  --color-jaune: #d97706;
+  --color-jaune: #b45309;
   --color-jaune-doux: #fff7d6;
-  --color-vert: #16a34a;
+  --color-vert: #15803d;
   --color-vert-doux: #dcfce7;
-  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: Archivo, Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-lecture: Georgia, "Times New Roman", serif;
+  --font-etroite: "Archivo Narrow", Archivo, sans-serif;
+  --font-italique: Fraunces, Georgia, serif;
 }
 
 html,
@@ -32,7 +39,7 @@ body,
 
 body {
   margin: 0;
-  background: var(--color-fond);
+  background: var(--color-bleu);
   color: var(--color-texte);
   font-family: var(--font-sans);
   /* RNF-06: body text never below 16px. */
@@ -85,4 +92,62 @@ body {
 
 .etape-en-cours {
   animation: pulse-doux 1.4s ease-in-out infinite;
+}
+
+/* ---- Stickers direction ---------------------------------------------- */
+
+/* Titles: heavy, tight, uppercase. Utilities (text-3xl…) still set the size. */
+@layer base {
+  h1 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+  }
+  h2 {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* The one serif word inside a heavy title ("into *moves*"). */
+.mot-italique {
+  font-family: var(--font-italique);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  color: var(--color-bleu);
+}
+
+/* A sticker: thick black outline, hard offset shadow, condensed caps. */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-etroite);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-texte);
+  border: 3px solid var(--color-texte);
+  border-radius: 12px;
+  padding: 6px 12px;
+  box-shadow: 3px 3px 0 var(--color-texte);
+}
+.sticker-ambre { background: var(--color-ambre); }
+.sticker-menthe { background: var(--color-menthe); }
+.sticker-rose { background: var(--color-rose); }
+.sticker-blanc { background: #fff; }
+
+/* Hard shadow for cards and secondary buttons. */
+.ombre-dure {
+  box-shadow: 4px 4px 0 var(--color-texte);
+}
+
+@keyframes balance {
+  0%, 100% { rotate: var(--r, 0deg); }
+  50% { rotate: calc(var(--r, 0deg) + 3deg); }
+}
+.balance {
+  animation: balance 4s ease-in-out infinite;
 }

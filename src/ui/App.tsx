@@ -35,22 +35,24 @@ export function Application() {
   const { ecran, santeProxy } = useRature()
   const EcranActif = ECRANS[ecran]
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4 py-6 sm:px-6">
-      <Entete />
-      <main className="flex-1">
-        <EcranActif />
-      </main>
-      <footer className="mt-8 border-t border-bord pt-4 text-xs text-muet">
+    <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-3 py-4 sm:px-6 sm:py-8">
+      <div className="flex flex-1 flex-col rounded-md bg-fond px-4 py-5 sm:px-8 sm:py-7">
+        <Entete />
+        <main className="flex-1">
+          <EcranActif />
+        </main>
+      </div>
+      <footer className="mt-4 px-1 text-xs text-white/85">
         No paper is ever stored · local history ·{' '}
         <span
           aria-label={ETIQUETTES_SANTE[santeProxy]}
           title={ETIQUETTES_SANTE[santeProxy]}
           className={
             santeProxy === 'ko'
-              ? 'text-jaune'
+              ? 'text-ambre'
               : santeProxy === 'ok'
-                ? 'text-vert'
-                : 'text-muet'
+                ? 'text-menthe'
+                : 'text-white/70'
           }
         >
           ● {ETIQUETTES_SANTE[santeProxy]}

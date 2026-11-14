@@ -21,7 +21,7 @@ function BadgeAnalyse() {
       <button
         type="button"
         onClick={() => aller('analyse')}
-        className="etape-en-cours rounded-full border border-jaune/60 px-3 py-1 text-xs text-jaune"
+        className="etape-en-cours sticker sticker-ambre text-xs"
       >
         Analysing…
       </button>
@@ -32,7 +32,7 @@ function BadgeAnalyse() {
       <button
         type="button"
         onClick={() => aller('diagnostic')}
-        className="rounded-full border border-vert/60 px-3 py-1 text-xs text-vert"
+        className="sticker sticker-menthe text-xs"
       >
         Diagnosis ready
       </button>
@@ -48,9 +48,9 @@ export function Entete() {
       <button
         type="button"
         onClick={() => aller('accueil')}
-        className="text-lg font-extrabold uppercase tracking-[0.2em] text-texte"
+        className="font-[family-name:var(--font-etroite)] text-2xl font-bold italic tracking-tight text-texte"
       >
-        Errata
+        errata!
       </button>
       <BadgeAnalyse />
       <nav aria-label="Main navigation" className="flex flex-wrap gap-1">
