@@ -21,15 +21,15 @@ export function Reglages() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">Réglages</h1>
+      <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
 
-      <Carte titre="Accès au modèle" ton="jaune">
+      <Carte titre="Model access" ton="jaune">
         <p className="mb-3 text-sm text-muet">
-          Par défaut, l’analyse passe par un proxy qui garde sa clé côté serveur. Si le quota du
-          proxy est épuisé, colle ta propre clé InferHub (BYOK) : elle reste sur cet appareil.
+          By default, analysis goes through a proxy that keeps its key server-side. If the proxy
+          quota is used up, paste your own InferHub key (BYOK): it stays on this device.
         </p>
         <label className="mb-3 block text-sm text-texte" htmlFor="cle">
-          Clé personnelle (BYOK)
+          Personal key (BYOK)
           <input
             id="cle"
             type="password"
@@ -41,7 +41,7 @@ export function Reglages() {
           />
         </label>
         <label className="mb-3 block text-sm text-texte" htmlFor="modele">
-          Modèle
+          Model
           <input
             id="modele"
             type="text"
@@ -52,7 +52,7 @@ export function Reglages() {
           />
         </label>
         <label className="block text-sm text-texte" htmlFor="proxy">
-          Adresse du proxy
+          Proxy address
           <input
             id="proxy"
             type="text"
@@ -70,23 +70,23 @@ export function Reglages() {
           setConfirme(true)
         }}
       >
-        {confirme ? 'Réglages enregistrés' : 'Enregistrer'}
+        {confirme ? 'Settings saved' : 'Save'}
       </Bouton>
 
       <PanneauSante />
 
-      <Carte titre="Confidentialité" ton="vert">
+      <Carte titre="Privacy" ton="vert">
         <ul className="list-inside list-disc space-y-1 text-sm text-muet">
-          <li>Aucune copie n’est conservée : l’image est oubliée dès la fin de l’analyse.</li>
-          <li>Le nom de l’élève est masqué avant tout affichage.</li>
-          <li>L’historique reste sur cet appareil (IndexedDB), jamais sur un serveur.</li>
-          <li>Le proxy ne journalise que l’horodatage et le code HTTP.</li>
+          <li>No paper is ever stored: the image is forgotten as soon as the analysis ends.</li>
+          <li>The student's name is masked before anything is shown.</li>
+          <li>The history stays on this device (IndexedDB), never on a server.</li>
+          <li>The proxy only logs the timestamp and the HTTP status code.</li>
         </ul>
       </Carte>
 
-      <Carte titre="Mes données">
+      <Carte titre="My data">
         <p className="mb-3 text-sm text-muet">
-          {diagnostics.length} diagnostic(s) enregistré(s) sur cet appareil.
+          {diagnostics.length} diagnosis(es) saved on this device.
         </p>
         <Bouton
           variante="secondaire"
@@ -94,7 +94,7 @@ export function Reglages() {
             void viderHistorique()
           }}
         >
-          Supprimer tout l’historique
+          Delete all history
         </Bouton>
       </Carte>
     </div>

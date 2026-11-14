@@ -17,7 +17,7 @@ export function CarteLundi({ stats }: Props) {
     total === 0 ? 0 : Math.round(((stats.parType[code] ?? 0) / total) * 100)
 
   return (
-    <Carte titre="Quoi reprendre lundi" ton="jaune">
+    <Carte titre="What to review on Monday" ton="jaune">
       <p className="text-sm text-texte">{plan.phrase}</p>
 
       {plan.types.length > 0 ? (
@@ -37,7 +37,7 @@ export function CarteLundi({ stats }: Props) {
       ) : null}
 
       {stats.nbCopies < 5 ? (
-        <p className="mt-3 text-xs text-muet">Échantillon faible (moins de 5 copies) : à confirmer.</p>
+        <p className="mt-3 text-xs text-muet">Small sample (fewer than 5 papers): to confirm.</p>
       ) : null}
     </Carte>
   )

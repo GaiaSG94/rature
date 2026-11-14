@@ -34,10 +34,10 @@ export function Prof() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">Mode professeur</h1>
+      <h1 className="text-2xl font-bold tracking-tight">Teacher mode</h1>
       <p className="text-sm text-muet">
-        Photographie le paquet de copies : tu obtiens la statistique d’erreurs de la classe et tu
-        sais quoi reprendre lundi. Ces copies ne rejoignent pas l’historique personnel.
+        Photograph the stack of papers: you get the class's error statistics and know what to
+        review on Monday. These papers do not join the personal history.
       </p>
 
       <label className="block cursor-pointer rounded-2xl border border-dashed border-bord bg-surface p-6 text-center">
@@ -49,18 +49,18 @@ export function Prof() {
           onChange={(event) => setFichiers(Array.from(event.target.files ?? []))}
         />
         <span className="text-base text-texte">
-          {fichiers.length > 0 ? `${fichiers.length} copie(s) prête(s)` : 'Choisir plusieurs photos'}
+          {fichiers.length > 0 ? `${fichiers.length} paper(s) ready` : 'Choose several photos'}
         </span>
-        <span className="mt-1 block text-sm text-muet">Sélection multiple, aucune limite de copie</span>
+        <span className="mt-1 block text-sm text-muet">Multiple selection, no paper limit</span>
       </label>
 
       <Bouton onClick={() => void lancer()} disabled={fichiers.length === 0 || occupe} pleineLargeur>
-        {occupe ? 'Analyse en cours…' : `Analyser ${fichiers.length || ''} copie(s)`.trim()}
+        {occupe ? 'Analysing…' : `Analyse ${fichiers.length || ''} paper(s)`.trim()}
       </Bouton>
 
       <div className="text-center">
         <Bouton variante="discret" onClick={() => void demo()} disabled={occupe}>
-          Charger le lot de démonstration (réponses enregistrées, hors ligne)
+          Load the demo batch (recorded answers, offline)
         </Bouton>
       </div>
       {erreur ? <p role="alert" className="text-sm text-jaune">{erreur}</p> : null}
@@ -68,19 +68,19 @@ export function Prof() {
       {stats.nbCopies > 0 ? (
         <>
           <Carte
-            titre={`${stats.nbCopies} copie(s) — type dominant : ${stats.typeLePlusFrequent ? libelleDe(stats.typeLePlusFrequent) : 'aucun'}`}
+            titre={`${stats.nbCopies} paper(s) — main type: ${stats.typeLePlusFrequent ? libelleDe(stats.typeLePlusFrequent) : 'none'}`}
             ton="jaune"
           >
             <p className="text-sm text-muet">
               {stats.typeLePlusFrequent
-                ? `${stats.pourcentageTypeFrequent} % des erreurs de la classe portent sur ce point.`
-                : 'Aucune erreur pondérée relevée.'}
+                ? `${stats.pourcentageTypeFrequent}% of the class's mistakes are on this point.`
+                : 'No weighted mistake found.'}
             </p>
           </Carte>
 
           <CarteLundi stats={stats} />
 
-          <Carte titre="Répartition des erreurs de la classe">
+          <Carte titre="Class error breakdown">
             <ul className="space-y-2 text-sm">
               {types.map((code) => (
                 <li key={code} className="flex items-baseline justify-between gap-3">
@@ -95,8 +95,8 @@ export function Prof() {
             </ul>
           </Carte>
 
-          <Bouton variante="secondaire" onClick={() => telechargerCsv(statsEnCsv(stats), 'rature-classe')}>
-            Exporter la statistique (CSV)
+          <Bouton variante="secondaire" onClick={() => telechargerCsv(statsEnCsv(stats), 'errata-class')}>
+            Export the statistics (CSV)
           </Bouton>
         </>
       ) : null}

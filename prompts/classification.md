@@ -1,42 +1,43 @@
 <!-- v2 — sortie bornée, 12/11 -->
 
-# Prompt — Classification dans la taxonomie fermée
+# Prompt — Classification into the closed taxonomy
 
-Tu reçois des annotations relevées sur une copie de mathématiques corrigée.
-Tu dois ranger **chaque annotation** dans **un** type d'erreur — et un seul.
+You receive annotations gathered from a corrected math paper. You must file
+**each annotation** into **one** error type — and only one.
 
-## Taxonomie autorisée (liste fermée)
+**Write every `explication` in English.**
+
+## Allowed taxonomy (closed list)
 
 {{TAXONOMIE}}
 
-## Règles de classification
+## Classification rules
 
-1. **Une annotation = un seul code.** Jamais deux codes pour une même faute.
-   Si deux causes se superposent, choisis celle qui explique l'erreur telle
-   qu'elle apparaît sur la copie.
-2. `E99` sert quand aucune catégorie ne correspond vraiment. C'est une réponse
-   **respectable** : une erreur mal rangée pollue le profil de l'élève.
-3. `E11` (recopie) est réservé au cas où le calcul est juste mais l'énoncé a
-   été mal recopié. Ne l'utilise pas comme fourre-tout.
-4. `confiance` est un nombre entre 0 et 1, **honnête et étalonné** : 0,95 si la
-   signature est nette et l'annotation explicite ; 0,7 si tu hésites entre deux
-   types ; 0,4 si l'annotation est illisible ou ambiguë. Ne mets jamais 0,95
-   par défaut.
-5. `explication` : **15 mots maximum**, ton bienveillant, jamais culpabilisant.
-   On dit « le signe a changé entre les deux lignes », pas « tu t'es trompé ».
-6. `ligne` : **120 caractères maximum** — l'extrait court, pas le paragraphe.
-7. Ne donne **jamais** la réponse de l'exercice, ni le calcul complet corrigé.
-   L'application entraîne, elle ne fait pas les devoirs.
+1. **One annotation = one code.** Never two codes for the same mistake. If two
+   causes overlap, pick the one that explains the error as it appears on the
+   paper.
+2. `E99` is for when no category truly matches. It is a **respectable** answer:
+   a misfiled error pollutes the student's profile.
+3. `E11` (copying) is reserved for when the maths is right but the statement was
+   miscopied. Do not use it as a catch-all.
+4. `confiance` is a number between 0 and 1, **honest and calibrated**: 0.95 if
+   the signature is clear and the annotation explicit; 0.7 if you hesitate
+   between two types; 0.4 if the annotation is illegible or ambiguous. Never put
+   0.95 by default.
+5. `explication`: **15 words max**, kind tone, never shaming. Say "the sign
+   changed between the two lines", not "you got it wrong".
+6. `ligne`: **120 characters max** — the short excerpt, not the paragraph.
+7. **Never** give the exercise's answer, nor the full corrected calculation.
+   The app trains, it does not do the homework.
 
-## Sortie — une ligne de JSON, rien d'autre
+## Output — one line of JSON, nothing else
 
-- **Uniquement l'objet JSON** : aucun mot avant, aucun mot après, aucun
-  commentaire.
-- **Une seule ligne**, sans indentation, sans saut de ligne.
-- **Pas de bloc de code markdown** autour : le parseur lit le JSON nu, les
-  balises ne servent qu'à coûter des tokens.
+- **Only the JSON object**: no word before, no word after, no comment.
+- **One single line**, no indentation, no line break.
+- **No markdown code block** around it: the parser reads raw JSON, the fences
+  only cost tokens.
 
-Exemple (une seule ligne) :
-`{"erreurs":[{"code":"E01","ligne":"3(x-2) = 3x - 2","explication":"Le facteur 3 doit multiplier les deux termes, pas un seul.","confiance":0.86}]}`
+Example (one line):
+`{"erreurs":[{"code":"E01","ligne":"3(x-2) = 3x - 2","explication":"The factor 3 must multiply both terms, not just one.","confiance":0.86}]}`
 
-Si la liste d'annotations est vide, rends `{"erreurs":[]}` et rien d'autre.
+If the annotation list is empty, return `{"erreurs":[]}` and nothing else.

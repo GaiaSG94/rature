@@ -23,28 +23,28 @@ export function Profil() {
   if (profil.totalAnalyses === 0) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">Mon profil d’erreur</h1>
+        <h1 className="text-2xl font-bold tracking-tight">My error profile</h1>
         <p className="text-sm text-muet">
-          Rien pour l’instant : le profil se construit à partir de la première copie analysée.
+          Nothing yet: the profile builds from the first paper you analyse.
         </p>
-        <Bouton onClick={() => aller('cadrage')}>Photographier une copie</Bouton>
+        <Bouton onClick={() => aller('cadrage')}>Photograph a paper</Bouton>
       </div>
     )
   }
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">Mon profil d’erreur</h1>
+      <h1 className="text-2xl font-bold tracking-tight">My error profile</h1>
 
       <Carte titre={phraseSynthese(profil)} ton="vert">
         <p className="text-sm text-muet">
-          {profil.totalAnalyses} copie(s) analysée(s). {dominant ? `${occurrencesDominantes(profil, dominant)} copie(s) où ce type était dominant.` : ''}
+          {profil.totalAnalyses} paper(s) analysed. {dominant ? `${occurrencesDominantes(profil, dominant)} paper(s) where this type was dominant.` : ''}
           <br />
-          E11 (recopie) et E99 (non typée) ne comptent pas : ce ne sont pas des lacunes de fond.
+          E11 (copying) and E99 (untyped) don't count: they are not real gaps.
         </p>
       </Carte>
 
-      <Carte titre="Récurrence par type">
+      <Carte titre="Recurrence by type">
         <div className="space-y-3">
           {lignes.map((entree) => (
             <BarreType key={entree.code} code={entree.code} occurrences={entree.n} part={entree.part} />
@@ -53,11 +53,11 @@ export function Profil() {
       </Carte>
 
       {dominant ? (
-        <Carte titre="Évolution de ta faille" ton="vert">
+        <Carte titre="Your weakness over time" ton="vert">
           {failleDisparue(diagnostics, dominant) ? (
             <p className="mb-3 rounded-lg border border-vert/50 bg-vert/10 px-3 py-2 text-sm text-vert">
-              🎉 « {phraseSynthese(profil).split(':').pop()?.trim()} » ne revient plus sur tes 3
-              dernières copies. Belle progression.
+              🎉 "{phraseSynthese(profil).split(':').pop()?.trim()}" no longer shows up in your last
+              3 papers. Nice progress.
             </p>
           ) : null}
           <div className="space-y-3">
@@ -74,12 +74,12 @@ export function Profil() {
         </Carte>
       ) : null}
 
-      <Carte titre="Évolution">
+      <Carte titre="Timeline">
         <ol className="space-y-1 text-sm">
           {profil.evolution.slice(-8).reverse().map((entree) => (
             <li key={entree.date} className="flex justify-between gap-3 text-muet">
               <span className="font-mono text-xs">{entree.date.slice(0, 10)}</span>
-              <span>{entree.typeDominant ?? 'copie propre'}</span>
+              <span>{entree.typeDominant ?? 'clean paper'}</span>
             </li>
           ))}
         </ol>
@@ -88,14 +88,14 @@ export function Profil() {
       <div className="flex flex-wrap gap-3">
         {resultat ? (
           <Bouton variante="secondaire" onClick={() => aller('diagnostic')}>
-            Revoir mon dernier diagnostic
+            Review my last diagnosis
           </Bouton>
         ) : null}
         <Bouton variante="secondaire" onClick={() => telechargerCsv(profilEnCsv(profil))}>
-          Exporter le profil (CSV)
+          Export the profile (CSV)
         </Bouton>
         <Bouton variante="secondaire" onClick={() => telechargerMarkdown(ficheEnMarkdown(profil, diagnostics))}>
-          Ma fiche de révision (Markdown)
+          My revision sheet (Markdown)
         </Bouton>
       </div>
     </div>

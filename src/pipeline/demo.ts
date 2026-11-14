@@ -61,7 +61,7 @@ function idDepuisChemin(chemin: string): string {
 function titreCopie(id: string, enregistrement: Enregistrement): string {
   const libelle = libelleDe(enregistrement.dominant as CodeErreur)
   const fautes = enregistrement.nbFautes
-  return fautes === undefined ? `${id} — ${libelle}` : `${libelle} — ${fautes} faute(s)`
+  return fautes === undefined ? `${id} — ${libelle}` : `${libelle} — ${fautes} mistake(s)`
 }
 
 function construireCopies(): CopieDemo[] {
@@ -94,9 +94,9 @@ export function copieDemo(id?: string): CopieDemo | undefined {
 /** Quelle étape le prompt en cours correspond-il ? (marqueurs de titres) */
 export function etapeDe(requete: RequeteLLM): EtapeDemo {
   const system = requete.system
-  if (system.includes('Garde-fou')) return 'verdict'
-  if (system.includes('Génération')) return 'exercice'
-  if (system.includes('Seconde passe')) return 'revue'
+  if (system.includes('Relevance guardrail')) return 'verdict'
+  if (system.includes('Generating a targeted exercise')) return 'exercice'
+  if (system.includes('Second pass')) return 'revue'
   return 'analyse'
 }
 
@@ -113,7 +113,7 @@ function attendre(ms: number): Promise<void> {
  */
 export function clientDemoPour(id?: string, options: { attente?: boolean } = {}): ClientBrut {
   const copie = copieDemo(id)
-  if (!copie) throw new Error('Mode démo : aucune réponse enregistrée dans corpus/reponses/.')
+  if (!copie) throw new Error('Demo mode: no recorded answer in corpus/reponses/.')
   const reponses = copie.enregistrement.reponses
   const durees = copie.enregistrement.durees ?? {}
   const attendu = options.attente ?? true
@@ -122,7 +122,7 @@ export function clientDemoPour(id?: string, options: { attente?: boolean } = {})
     const texte = reponses[etape]
     if (!texte) {
       throw new Error(
-        `Mode démo : pas de réponse enregistrée pour l'étape « ${etape} » — recapturer le corpus.`,
+        `Demo mode: no recorded answer for step "${etape}" — recapture the corpus.`,
       )
     }
     // Les durées sont enregistrées par ÉTAPE du pipeline (extrait, classifie,
@@ -160,7 +160,7 @@ export function origineDemo(id?: string) {
 /** Une copie de démo, en `File` : le pipeline tourne exactement comme en vrai. */
 export async function fichierDemoPour(id?: string): Promise<File> {
   const copie = copieDemo(id)
-  if (!copie) throw new Error('Mode démo : aucune copie enregistrée disponible.')
+  if (!copie) throw new Error('Demo mode: no recorded paper available.')
   const reponse = await fetch(copie.image)
   const blob = await reponse.blob()
   return new File([blob], `${copie.id}.png`, { type: blob.type || 'image/png' })

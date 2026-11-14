@@ -19,9 +19,9 @@ export function BarreType({ code, occurrences, part }: Props) {
       <div
         className="h-2 w-full overflow-hidden rounded-full bg-surface-2"
         role="img"
-        aria-label={`${libelleDe(code)} : ${pourcentage} % de tes erreurs`}
+        aria-label={`${libelleDe(code)}: ${pourcentage}% of your mistakes`}
       >
-        <div className="h-full rounded-full bg-vert" style={{ width: `${Math.max(pourcentage, 2)}%` }} />
+        <div className="h-full rounded-full bg-texte" style={{ width: `${Math.max(pourcentage, 2)}%` }} />
       </div>
     </div>
   )

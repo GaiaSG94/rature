@@ -11,9 +11,9 @@ type Props = {
 
 const CLASSES: Record<NonNullable<Props['variante']>, string> = {
   principal:
-    'bg-jaune text-fond font-semibold hover:brightness-110 active:brightness-95 disabled:opacity-40',
+    'bg-texte text-fond font-bold hover:opacity-90 active:opacity-80 disabled:opacity-40',
   secondaire:
-    'bg-surface-2 text-texte border border-bord hover:border-jaune disabled:opacity-40',
+    'bg-surface text-texte border border-texte hover:bg-surface-2 disabled:opacity-40',
   discret: 'bg-transparent text-muet hover:text-texte underline underline-offset-4',
 }
 
@@ -32,7 +32,7 @@ export function Bouton({
       onClick={onClick}
       disabled={disabled}
       className={[
-        'min-h-12 rounded-xl px-5 py-3 text-base transition',
+        'min-h-12 rounded-full px-6 py-3 text-base transition',
         CLASSES[variante],
         pleineLargeur ? 'w-full' : '',
       ].join(' ')}

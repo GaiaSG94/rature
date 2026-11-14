@@ -64,25 +64,25 @@ export function pointsCourbe(serie: number[]): { index: number; valeur: number }
 /** Phrase bienveillante qui reflète la tendance du type dominant. */
 export function messageProgression(profil: Profil, diagnostics: Diagnostic[]): string {
   const dominant = typeDominant(profil)
-  if (!dominant) return "Pas encore d'erreur récurrente : ajoute une copie pour commencer ta trajectoire."
+  if (!dominant) return 'No recurring mistake yet: add a paper to start your trajectory.'
   const serie = occurrencesParCopie(diagnostics, dominant)
   const tendanceDuType = tendance(serie)
   const nom = libelleDe(dominant).toLowerCase()
   const total = serie.reduce((a, b) => a + b, 0)
 
   if (failleDisparue(diagnostics, dominant)) {
-    return `Belle progression : « ${nom} » ne revient plus sur tes 3 dernières copies.`
+    return `Nice progress: "${nom}" no longer shows up in your last 3 papers.`
   }
   if (tendanceDuType === 'baisse') {
-    return `« ${nom} » diminue : ${total} occurrence(s) au total, moins sur tes dernières copies. Continue.`
+    return `"${nom}" is going down: ${total} time(s) in all, fewer on your recent papers. Keep going.`
   }
   if (tendanceDuType === 'hausse') {
-    return `« ${nom} » apparaît plus souvent ces derniers temps : c'est le bon moment pour un exercice ciblé.`
+    return `"${nom}" shows up more often lately: a good moment for a targeted exercise.`
   }
   if (tendanceDuType === 'stable') {
-    return `« ${nom} » reste stable (${total} occurrence(s)) : un exercice ciblé peut aider à le faire baisser.`
+    return `"${nom}" stays steady (${total} time(s)): a targeted exercise can help bring it down.`
   }
-  return `Analyse au moins deux copies pour voir ta progression sur « ${nom} ».`
+  return `Analyse at least two papers to see your progress on "${nom}".`
 }
 
 /** Les codes à tracer : les 3 plus fréquents du profil. */

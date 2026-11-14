@@ -10,7 +10,7 @@ export function ExplicationType({ code, compact = false }: Props) {
   if (!explication) {
     return (
       <p className="text-sm text-muet">
-        Cette faute n’a pas pu être rangée dans un type précis : elle ne compte pas dans ton profil.
+        This mistake could not be sorted into a precise type: it does not count in your profile.
       </p>
     )
   }
@@ -19,7 +19,7 @@ export function ExplicationType({ code, compact = false }: Props) {
       <BadgeCode code={explication.code} />
       <p className="text-texte/90">{explication.pourquoi}</p>
       <p className="text-vert">
-        <span className="font-medium">Le geste : </span>
+        <span className="font-medium">The move: </span>
         {explication.geste}
       </p>
       <div className="grid gap-1 sm:grid-cols-2">

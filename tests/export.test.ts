@@ -22,7 +22,7 @@ describe('export CSV du profil (RF-21)', () => {
   it('en-tête, tri par fréquence et total', () => {
     const csv = profilEnCsv(jeuDeTest().profil)
     const lignes = csv.split('\n')
-    expect(lignes[0]).toBe('code,libelle,occurrences,part_pourcent')
+    expect(lignes[0]).toBe('code,label,count,percent')
     expect(lignes[1]).toContain('E01')
     expect(lignes[1]).toContain('67')
     expect(lignes.at(-1)).toContain('total')
@@ -39,13 +39,13 @@ describe('fiche de révision Markdown (RF-22)', () => {
   it('cite le type dominant et reste bienveillante', () => {
     const { profil, diagnostics } = jeuDeTest()
     const fiche = ficheEnMarkdown(profil, diagnostics)
-    expect(fiche).toContain('signe perdu')
+    expect(fiche).toContain('lost sign')
     expect(fiche.toLowerCase()).not.toContain('tu as fait')
-    expect(fiche).toContain('Mes dernières copies')
+    expect(fiche).toContain('My recent papers')
   })
 
   it('profil vide : message d’invitation, pas de tableau', () => {
-    expect(ficheEnMarkdown(profilVide(), [])).toContain('Aucune erreur récurrente')
+    expect(ficheEnMarkdown(profilVide(), [])).toContain('No recurring mistake')
   })
 })
 
@@ -56,7 +56,7 @@ describe('mode prof (RF-20)', () => {
     expect(stats.nbCopies).toBe(2)
     expect(stats.typeLePlusFrequent).toBe('E01')
     expect(stats.pourcentageTypeFrequent).toBe(67)
-    expect(statsEnCsv(stats).split('\n')[0]).toBe('nb_copies,code,libelle,occurrences,part_pourcent')
+    expect(statsEnCsv(stats).split('\n')[0]).toBe('papers,code,label,count,percent')
   })
 
   it('nom de fichier daté', () => {

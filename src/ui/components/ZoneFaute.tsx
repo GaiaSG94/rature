@@ -19,7 +19,7 @@ export function ZoneFaute({ index, code, zone, selectionne, onSelect }: Props) {
     <button
       type="button"
       onClick={() => onSelect(index)}
-      aria-label={`Faute ${index + 1} : ${libelleDe(code)} — agrandir`}
+      aria-label={`Mistake ${index + 1}: ${libelleDe(code)} — zoom in`}
       aria-pressed={selectionne}
       className={[
         'absolute rounded border-2 transition',

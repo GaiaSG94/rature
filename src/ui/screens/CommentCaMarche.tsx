@@ -21,16 +21,16 @@ export function CommentCaMarche() {
   return (
     <div className="space-y-5">
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold">Comment ça marche</h1>
+        <h1 className="text-2xl font-bold tracking-tight">How it works</h1>
         <p className="text-muet">
-          De la photo de ta copie corrigée à l’exercice qui travaille exactement ta faille : le
-          pipeline, les 12 types d’erreur, le garde-fou, tes données, et les chiffres réels. Rien
-          n’est promis, tout est sourcé.
+          From the photo of your corrected paper to the exercise that works exactly on your
+          weakness: the pipeline, the 12 error types, the guardrail, your data, and the real
+          numbers. Nothing is promised, everything is sourced.
         </p>
       </div>
 
-      <nav aria-label="Sommaire" className="rounded-2xl border border-bord bg-surface p-4">
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muet">Sommaire</h2>
+      <nav aria-label="Contents" className="rounded-2xl border border-bord bg-surface p-4">
+        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muet">Contents</h2>
         <ol className="grid gap-1 sm:grid-cols-2">
           {SOMMAIRE.map((section) => (
             <li key={section.id}>

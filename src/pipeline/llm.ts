@@ -143,10 +143,10 @@ function parserEvenement(brut: string): EvenementFlux | null {
 
 /** Message lisible pour l'écran d'analyse : on dit ce que le proxy essaie. */
 export function messageProgres(donnees: Record<string, unknown>): string {
-  const modele = typeof donnees.modele === 'string' ? donnees.modele.split('/').pop() : 'modèle'
+  const modele = typeof donnees.modele === 'string' ? donnees.modele.split('/').pop() : 'model'
   const essai = typeof donnees.essai === 'number' ? donnees.essai : 0
   const statut = donnees.statut ?? '?'
-  return `${modele} indisponible (${statut}) — essai ${essai}, modèle suivant…`
+  return `${modele} unavailable (${statut}) — attempt ${essai}, next model…`
 }
 
 /**
@@ -168,9 +168,9 @@ async function appelerEnFlux(transport: Transport, requete: RequeteLLM, modele: 
     })
   } catch (erreur) {
     if (erreur instanceof Error && erreur.name === 'TimeoutError') {
-      throw new ErreurLLM('Le modèle met trop de temps à répondre.', 504)
+      throw new ErreurLLM('The model is taking too long to answer.', 504)
     }
-    throw new ErreurLLM('Réseau indisponible. Vérifie ta connexion puis réessaie.', 0)
+    throw new ErreurLLM('Network unavailable. Check your connection and try again.', 0)
   }
   if (!reponse.ok) throw await erreurDepuisReponse(reponse)
 
@@ -211,7 +211,7 @@ async function lireFlux(reponse: Response, transport: Transport): Promise<string
       }
     }
   }
-  if (!texte.trim()) throw new ErreurLLM('Réponse vide du modèle.', 502)
+  if (!texte.trim()) throw new ErreurLLM('Empty response from the model.', 502)
   return texte
 }
 
@@ -220,10 +220,10 @@ async function lireCorpsJson(reponse: Response, transport: Transport): Promise<s
   try {
     data = (await reponse.json()) as ReponseProxy
   } catch {
-    throw new ErreurLLM('Réponse du proxy illisible (JSON attendu).', 502)
+    throw new ErreurLLM('Unreadable proxy response (JSON expected).', 502)
   }
   const texte = typeof data.texte === 'string' ? data.texte : ''
-  if (texte.trim().length === 0) throw new ErreurLLM('Réponse vide du modèle.', 502)
+  if (texte.trim().length === 0) throw new ErreurLLM('Empty response from the model.', 502)
   if (typeof data.modele === 'string' && data.modele) {
     transport.surModele?.(data.modele, data.tentatives ?? 1)
   }
@@ -246,9 +246,9 @@ async function appeler(transport: Transport, requete: RequeteLLM, modele: string
     })
   } catch (erreur) {
     if (erreur instanceof Error && erreur.name === 'TimeoutError') {
-      throw new ErreurLLM('Le modèle met trop de temps à répondre.', 504)
+      throw new ErreurLLM('The model is taking too long to answer.', 504)
     }
-    throw new ErreurLLM('Réseau indisponible. Vérifie ta connexion puis réessaie.', 0)
+    throw new ErreurLLM('Network unavailable. Check your connection and try again.', 0)
   }
 
   // `await` indispensable : sans lui on lèverait une Promesse, pas une erreur —
@@ -273,15 +273,15 @@ async function erreurDepuisReponse(reponse: Response): Promise<ErreurLLM> {
     // Quota du proxy partagé : la clé de l'utilisateur est le seul recours.
     if (data.quota === 'proxy') {
       return new ErreurLLM(
-        `${data.erreur || 'Quota du proxy atteint.'} Colle ta propre clé dans Réglages, ou réessaie plus tard.`,
+        `${data.erreur || 'Proxy quota reached.'} Paste your own key in Settings, or try again later.`,
         429,
         { quotaProxy: true },
       )
     }
     // Limite de débit du fournisseur : transitoire, on réessaie après une pause.
-    return new ErreurLLM(data.erreur || 'Limite de débit du fournisseur de modèles.', 429)
+    return new ErreurLLM(data.erreur || 'Model provider rate limit.', 429)
   }
-  const message = data.erreur || `Analyse refusée (HTTP ${reponse.status}).`
+  const message = data.erreur || `Analysis refused (HTTP ${reponse.status}).`
   return new ErreurLLM(message, reponse.status, { chaineEpuisee })
 }
 
@@ -332,7 +332,7 @@ export async function completer(transport: Transport, requete: RequeteLLM): Prom
       504,
     )
   }
-  throw derniere ?? new ErreurLLM('Aucun modèle disponible pour le moment.', 503)
+  throw derniere ?? new ErreurLLM('No model available right now.', 503)
 }
 
 /** Extrait le premier objet JSON d'un texte (le modèle encadre parfois). */
@@ -345,7 +345,7 @@ export function extraireJson(texte: string): unknown {
     const interne = tentativeParse(texte.slice(debut, fin + 1))
     if (interne !== undefined) return interne
   }
-  throw new ErreurLLM('Le modèle a répondu hors format JSON.', 502)
+  throw new ErreurLLM('The model answered outside JSON format.', 502)
 }
 
 function tentativeParse(texte: string): unknown {

@@ -27,14 +27,14 @@ const SIGNATURES: Record<string, RegExp> = {
   E02: /\d?\(?x?\)?\(/, // une parenthèse à développer
   E03: /²|\) ?\(/, // un carré ou un produit de deux binômes
   E04: /\d\/\d/, // des fractions
-  E05: /domaine|x² = |√\(/, // valeur interdite, deux racines, domaine
+  E05: /domain|x² = |√\(/, // valeur interdite, deux racines, domaine
   E06: /[²³ⁿ]|x⁵|÷ x/, // des exposants
   E07: /√/, // des racines
   E08: /=/, // une équation à transposer
   E09: /exact|arrondi/i, // la précision
-  E10: /unité|m²|km\/h|Convertis/i, // les unités
-  E11: /Recopie/i, // la recopie
-  E12: /Montre|Prouve|justif/i, // la justification
+  E10: /unit|m²|km\/h|Convert/i, // les unités
+  E11: /Copy/i, // la recopie
+  E12: /Show|Prove|justif/i, // la justification
 }
 
 describe('banque d’exercices locale (idée 1)', () => {
@@ -45,7 +45,7 @@ describe('banque d’exercices locale (idée 1)', () => {
       expect(liste.map((e) => e.difficulte).sort()).toEqual([1, 2, 3])
       for (const exercice of liste) {
         expect(exercice.code).toBe(code)
-        expect(exercice.niveau).toMatch(/seconde|première/)
+        expect(exercice.niveau).toMatch(/Grade 10|Grade 11/)
       }
     }
   })
@@ -127,7 +127,7 @@ describe('banque d’exercices locale (idée 1)', () => {
     expect(exercice.verdict.travailleLeBonType).toBe(true)
     expect(exercice.verdict.neDonneLaSolutionOrigine).toBe(true)
     expect(exercice.verdict.memeNiveau).toBe(true)
-    expect(origineExercice(exercice.exercice)).toContain('banque locale')
-    expect(origineExercice({ ...exercice.exercice, tentative: 1 })).toContain('inédit')
+    expect(origineExercice(exercice.exercice)).toContain('local bank')
+    expect(origineExercice({ ...exercice.exercice, tentative: 1 })).toContain('Fresh')
   })
 })

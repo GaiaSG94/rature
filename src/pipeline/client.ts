@@ -18,7 +18,7 @@ export function clientSimule(reponses: string[]): ClientBrut {
   let index = 0
   return async () => {
     const reponse = reponses[index]
-    if (reponse === undefined) throw new Error('clientSimule : plus de réponse disponible')
+    if (reponse === undefined) throw new Error('clientSimule: no response left')
     index += 1
     return reponse
   }

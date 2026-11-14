@@ -13,10 +13,10 @@ export function Analyse() {
   const { progression, erreur, occupe, aller, messageProgres, modeleRepondu } = useRature()
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">Analyse en cours</h1>
+      <h1 className="text-2xl font-bold tracking-tight">Analysis in progress</h1>
       <p className="text-sm text-muet">
-        Budget annoncé : moins de {(BUDGET_PIPELINE_MS / 1000).toFixed(0)} s de la photo au diagnostic.
-        La copie n’est envoyée qu’à ce traitement, puis oubliée.
+        Announced budget: under {(BUDGET_PIPELINE_MS / 1000).toFixed(0)}s from photo to diagnosis.
+        The paper is sent only for this processing, then forgotten.
       </p>
 
       <Carte>
@@ -25,7 +25,7 @@ export function Analyse() {
 
       <div className="text-center">
         <Bouton variante="discret" onClick={() => aller('accueil')}>
-          Continuer sans attendre — un badge me préviendra quand ce sera prêt
+          Continue without waiting — a badge will tell me when it's ready
         </Bouton>
       </div>
 
@@ -36,11 +36,11 @@ export function Analyse() {
       ) : null}
 
       {modeleRepondu ? (
-        <p className="text-xs text-muet">Répondu par {modeleRepondu.split('/').pop()}</p>
+        <p className="text-xs text-muet">Answered by {modeleRepondu.split('/').pop()}</p>
       ) : null}
 
       {erreur ? <p role="alert" className="text-sm text-jaune">{erreur}</p> : null}
-      {!occupe && !erreur ? <p className="text-sm text-muet">Chargement du résultat…</p> : null}
+      {!occupe && !erreur ? <p className="text-sm text-muet">Loading the result…</p> : null}
     </div>
   )
 }

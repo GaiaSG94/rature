@@ -6,13 +6,13 @@
  * c'est ajouter une entrée ici.
  */
 export const SECTIONS = {
-  pipeline: { id: 'pipeline', titre: 'Le pipeline, étape par étape' },
-  taxonomie: { id: 'taxonomie', titre: 'Les 12 types d’erreur' },
-  gardeFou: { id: 'garde-fou', titre: 'Le garde-fou de l’exercice' },
-  confidentialite: { id: 'confidentialite', titre: 'Tes données : les cinq règles' },
-  mesures: { id: 'mesures', titre: 'Les chiffres réels, mesurés' },
-  outilsIA: { id: 'outils-ia', titre: 'L’IA dans le produit, l’IA dans le code' },
-  liens: { id: 'liens', titre: 'Aller plus loin' },
+  pipeline: { id: 'pipeline', titre: 'The pipeline, step by step' },
+  taxonomie: { id: 'taxonomie', titre: 'The 12 error types' },
+  gardeFou: { id: 'garde-fou', titre: 'The exercise guardrail' },
+  confidentialite: { id: 'confidentialite', titre: 'Your data: the five rules' },
+  mesures: { id: 'mesures', titre: 'The real numbers, measured' },
+  outilsIA: { id: 'outils-ia', titre: 'AI in the product, AI in the code' },
+  liens: { id: 'liens', titre: 'Going further' },
 } as const
 
 export type SectionDef = (typeof SECTIONS)[keyof typeof SECTIONS]

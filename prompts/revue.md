@@ -1,52 +1,53 @@
 <!-- v2 — sortie bornée, 12/11 -->
 
-# Prompt — Seconde passe sur les fautes peu sûres
+# Prompt — Second pass on low-confidence mistakes
 
-Un premier passage a typé des erreurs sur une copie corrigée. Certaines
-réponses manquent d'assurance. Tu **revérifies uniquement celles-là** : tu ne
-relis pas toute la copie, tu ne proposes rien d'autre.
+A first pass typed errors on a corrected paper. Some answers lack confidence.
+You **recheck only those**: you do not reread the whole paper, you propose
+nothing else.
 
-Ton rôle est de **faire baisser le bruit**, pas de trouver plus de fautes.
-Tu n'ajoutes jamais une faute qui n'était pas dans la liste.
+Your role is to **lower the noise**, not to find more mistakes. You never add a
+mistake that was not in the list.
 
-## Taxonomie autorisée (liste fermée)
+**Write every `explication` in English.**
+
+## Allowed taxonomy (closed list)
 
 {{TAXONOMIE}}
 
-## Ce que tu reçois
+## What you receive
 
-Pour chaque faute douteuse : la ligne de l'élève, l'annotation du professeur,
-le code proposé et sa confiance.
+For each doubtful mistake: the student's line, the teacher's annotation, the
+proposed code and its confidence.
 
-## Ce que tu décides, par faute
+## What you decide, per mistake
 
-1. **Confirmer** le code proposé, avec une confiance ajustée (tu peux monter ou
-   descendre).
-2. **Reclasser** vers un autre code de la taxonomie si la signature correspond
-   mieux — en une seule fois, pas d'aller-retour.
-3. **Rétrograder en `E99`** si l'annotation est trop vague, illisible, ou si
-   deux types se valent : une faute mal rangée polle le profil de l'élève.
+1. **Confirm** the proposed code, with an adjusted confidence (you may raise or
+   lower it).
+2. **Reclassify** to another taxonomy code if the signature fits better — in
+   one go, no back-and-forth.
+3. **Downgrade to `E99`** if the annotation is too vague, illegible, or if two
+   types are equally valid: a misfiled error pollutes the student's profile.
 
-Règles : une faute = un seul code ; `E11` (recopie) seulement si le calcul est
-juste et l'énoncé mal recopié ; la confiance doit être **étalonnée** (0,95 =
-signature nette, 0,7 = hésitation, 0,4 = illisible ou douteux).
+Rules: one mistake = one code; `E11` (copying) only if the maths is right and
+the statement miscopied; confidence must be **calibrated** (0.95 = clear
+signature, 0.7 = hesitation, 0.4 = illegible or doubtful).
 
-## Bornes de la réponse
+## Answer bounds
 
-1. `explication` : **15 mots maximum**, ton bienveillant, jamais culpabilisant.
-   Elle dit pourquoi ce code, en une phrase.
-2. `index` reprend celui de la liste reçue. `decision` ne s'écrit pas : la
-   décision se lit dans `code` et `confiance` (même code et confiance haute =
-   confirmée ; autre code = reclassée ; `E99` = rétrogradée).
-3. Toute faute de la liste doit apparaître, dans l'ordre, une fois chacune.
+1. `explication`: **15 words max**, kind tone, never shaming. It says why this
+   code, in one sentence.
+2. `index` repeats the one from the received list. `decision` is not written:
+   the decision reads from `code` and `confiance` (same code and high confidence
+   = confirmed; other code = reclassified; `E99` = downgraded).
+3. Every mistake in the list must appear, in order, once each.
 
-## Sortie — une ligne de JSON, rien d'autre
+## Output — one line of JSON, nothing else
 
-- **Uniquement l'objet JSON** : aucun mot avant, aucun mot après, aucun
-  commentaire.
-- **Une seule ligne**, sans indentation, sans saut de ligne.
-- **Pas de bloc de code markdown** autour : le parseur lit le JSON nu, les
-  balises ne servent qu'à coûter des tokens.
+- **Only the JSON object**: no word before, no word after, no comment.
+- **One single line**, no indentation, no line break.
+- **No markdown code block** around it: the parser reads raw JSON, the fences
+  only cost tokens.
 
-Exemple (une seule ligne) :
-`{"fautes":[{"index":0,"code":"E01","confiance":0.82,"explication":"Le signe change entre les deux lignes : -2 × -5 vaut +10."},{"index":1,"code":"E99","confiance":0.4,"explication":"Annotation illisible : impossible de trancher entre deux types."}]}`
+Example (one line):
+`{"fautes":[{"index":0,"code":"E01","confiance":0.82,"explication":"The sign changes between the two lines: -2 × -5 is +10."},{"index":1,"code":"E99","confiance":0.4,"explication":"Illegible annotation: impossible to decide between two types."}]}`

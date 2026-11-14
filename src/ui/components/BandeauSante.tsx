@@ -12,17 +12,17 @@ export function BandeauSante() {
   if (santeProxy !== 'ko') return null
   return (
     <div role="alert" className="rounded-xl border border-jaune/50 bg-surface-2 p-3">
-      <p className="font-medium text-jaune">Le modèle est momentanément indisponible.</p>
+      <p className="font-medium text-jaune">The model is temporarily unavailable.</p>
       <p className="mt-1 text-sm text-muet">
-        Pas d'inquiétude : tu peux voir le produit quand même, et vérifier ta connexion. La
-        démonstration rejoue des réponses réellement enregistrées, sans aucun appel réseau.
+        Don't worry: you can still see the product, and check your connection. The demo replays
+        answers that were actually recorded, with no network call at all.
       </p>
       <div className="mt-3 flex flex-wrap gap-3">
         <Bouton variante="secondaire" onClick={() => void analyserDemo()} disabled={occupe}>
-          Lancer la démonstration
+          Run the demo
         </Bouton>
         <Bouton variante="discret" onClick={() => aller('reglages')}>
-          Coller ma propre clé (BYOK)
+          Paste my own key (BYOK)
         </Bouton>
       </div>
     </div>

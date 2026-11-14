@@ -23,13 +23,13 @@ export const PROMPT_CLASSIFICATION = promptMd.replace('{{TAXONOMIE}}', blocTaxon
 /** Les annotations sont numérotées : le modèle répond dans le même ordre. */
 export function messageAnnotations(extraction: Extraction): string {
   const lignes = extraction.annotations.map((annotation, index) => {
-    const morceaux = [`${index + 1}. ligne : ${annotation.ligne}`, `   annotation : ${annotation.annotation}`]
-    if (annotation.eleve) morceaux.push(`   écrit par l'élève : ${annotation.eleve}`)
-    if (annotation.attendu) morceaux.push(`   attendu (d'après le prof) : ${annotation.attendu}`)
+    const morceaux = [`${index + 1}. line: ${annotation.ligne}`, `   annotation: ${annotation.annotation}`]
+    if (annotation.eleve) morceaux.push(`   written by the student: ${annotation.eleve}`)
+    if (annotation.attendu) morceaux.push(`   expected (per the teacher): ${annotation.attendu}`)
     return morceaux.join('\n')
   })
   return [
-    "Annonce de la copie : une annotation = une erreur. Classe chacune.",
+    "From the paper: one annotation = one error. File each one.",
     '',
     lignes.join('\n'),
   ].join('\n')

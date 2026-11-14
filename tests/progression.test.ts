@@ -62,12 +62,12 @@ describe('trajectoire du profil (lot 5)', () => {
     let profil = profilVide()
     for (const d of diagnostics) profil = agreger(profil, d)
     const message = messageProgression(profil, diagnostics)
-    expect(message.toLowerCase()).toContain('signe perdu')
+    expect(message.toLowerCase()).toContain('lost sign')
     for (const mot of MOTS_CULPABILISANTS) expect(message.toLowerCase()).not.toContain(mot)
   })
 
   it('profil vide → message d’invitation, codesATracer vide', () => {
-    expect(messageProgression(profilVide(), [])).toContain('trajectoire')
+    expect(messageProgression(profilVide(), [])).toContain('trajectory')
     expect(codesATracer(profilVide())).toEqual([])
   })
 

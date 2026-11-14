@@ -29,23 +29,22 @@ export function PanneauSante() {
 
   return (
     <section className="rounded-2xl border border-bord bg-surface p-4">
-      <h3 className="text-base font-semibold text-texte">Vérifier que tout fonctionne</h3>
+      <h3 className="text-base font-semibold text-texte">Check everything works</h3>
       <p className="mt-1 text-sm text-muet">
-        Sept contrôles réels, sans consommer de quota : proxy, chaîne de repli, cache local, historique,
-        banque d’exercices, taxonomie, budget d'attente. Chaque ligne affiche la preuve, pas une
-        coche.
+        Seven real checks, using no quota: proxy, fallback chain, local cache, history, exercise
+        bank, taxonomy, waiting budget. Each line shows the proof, not a checkmark.
       </p>
 
       <div className="mt-3">
         <Bouton onClick={() => void lancer()} disabled={enCours}>
-          {enCours ? 'Vérification en cours…' : 'Lancer la vérification'}
+          {enCours ? 'Checking…' : 'Run the check'}
         </Bouton>
       </div>
 
       {controles ? (
         <ul className="mt-4 space-y-2">
           <li className="text-xs text-muet">
-            {reussis} contrôle(s) réussi(s) sur {controles.length}.
+            {reussis} check(s) passed out of {controles.length}.
           </li>
           {controles.map((controle) => (
             <li

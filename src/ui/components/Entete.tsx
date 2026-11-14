@@ -2,14 +2,14 @@ import { useRature } from '../../etat/useRature'
 import type { Ecran } from '../../etat/useRature'
 
 const LIENS: { ecran: Ecran; libelle: string }[] = [
-  { ecran: 'accueil', libelle: 'Copie' },
+  { ecran: 'accueil', libelle: 'Paper' },
   // Entrée directe : sans elle, le diagnostic et l'exercice n'étaient atteignables
   // qu'en sortant d'une analyse — invisibles après la démonstration complète.
-  { ecran: 'diagnostic', libelle: 'Diagnostic' },
-  { ecran: 'profil', libelle: 'Profil' },
-  { ecran: 'prof', libelle: 'Prof' },
-  { ecran: 'apropos', libelle: 'Comment ça marche' },
-  { ecran: 'reglages', libelle: 'Réglages' },
+  { ecran: 'diagnostic', libelle: 'Diagnosis' },
+  { ecran: 'profil', libelle: 'Profile' },
+  { ecran: 'prof', libelle: 'Teacher' },
+  { ecran: 'apropos', libelle: 'How it works' },
+  { ecran: 'reglages', libelle: 'Settings' },
 ]
 
 /** Badge discret : l'analyse continue pendant que l'utilisateur navigue. */
@@ -23,7 +23,7 @@ function BadgeAnalyse() {
         onClick={() => aller('analyse')}
         className="etape-en-cours rounded-full border border-jaune/60 px-3 py-1 text-xs text-jaune"
       >
-        Analyse en cours…
+        Analysing…
       </button>
     )
   }
@@ -34,7 +34,7 @@ function BadgeAnalyse() {
         onClick={() => aller('diagnostic')}
         className="rounded-full border border-vert/60 px-3 py-1 text-xs text-vert"
       >
-        Diagnostic prêt
+        Diagnosis ready
       </button>
     )
   }
@@ -48,12 +48,12 @@ export function Entete() {
       <button
         type="button"
         onClick={() => aller('accueil')}
-        className="text-xl font-semibold tracking-tight text-texte"
+        className="text-lg font-extrabold uppercase tracking-[0.2em] text-texte"
       >
-        Raturé <span aria-hidden="true">🖊️</span>
+        Errata
       </button>
       <BadgeAnalyse />
-      <nav aria-label="Navigation principale" className="flex gap-1">
+      <nav aria-label="Main navigation" className="flex flex-wrap gap-1">
         {LIENS.map((lien) => (
           <button
             key={lien.ecran}
@@ -61,8 +61,8 @@ export function Entete() {
             onClick={() => aller(lien.ecran)}
             aria-current={ecran === lien.ecran ? 'page' : undefined}
             className={[
-              'rounded-lg px-3 py-2 text-sm transition',
-              ecran === lien.ecran ? 'bg-surface-2 text-texte' : 'text-muet hover:text-texte',
+              'rounded-full px-3 py-1.5 text-sm font-medium transition',
+              ecran === lien.ecran ? 'bg-texte text-fond' : 'text-muet hover:text-texte',
             ].join(' ')}
           >
             {lien.libelle}
