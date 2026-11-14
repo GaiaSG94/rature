@@ -10,14 +10,37 @@ export function Accueil() {
   const plusieurs = ID_COPIES_DEMO.length > 1
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-          Your corrected paper knows what you repeat.
+      <div className="relative space-y-4 pt-10 pb-6 text-center sm:pt-14">
+        <span
+          aria-hidden="true"
+          className="balance sticker sticker-ambre absolute left-0 top-0 text-sm sm:-left-2"
+          style={{ ['--r' as string]: '-9deg' }}
+        >
+          <span className="text-xl">E03</span> ×14
+        </span>
+        <span
+          aria-hidden="true"
+          className="balance sticker sticker-menthe absolute right-0 top-1 text-sm sm:-right-2"
+          style={{ ['--r' as string]: '8deg', animationDelay: '-1.5s' }}
+        >
+          E02 cleared ✓
+        </span>
+        <p className="text-sm font-medium">A study app for students who hate red pen.</p>
+        <h1 className="text-5xl sm:text-7xl">
+          Turn your mistakes into <span className="mot-italique">moves</span>
         </h1>
-        <p className="text-muet">
-          Photograph it. We read the teacher's marks, sort them by error type, and build the
-          exercise that works on <em>your</em> weakness.
+        <p className="mx-auto max-w-md text-muet">
+          Photograph your corrected paper. We read the teacher's marks, sort them by error type,
+          and build the exercise that works on <em>your</em> weakness.
         </p>
+        <div className="flex flex-wrap justify-center gap-3 pt-1" aria-hidden="true">
+          <span className="sticker sticker-rose text-xs" style={{ rotate: '-4deg' }}>
+            No grades. Ever.
+          </span>
+          <span className="sticker sticker-blanc text-xs" style={{ rotate: '3deg' }}>
+            12 error types
+          </span>
+        </div>
       </div>
 
       <Bouton onClick={() => aller('cadrage')} pleineLargeur>
